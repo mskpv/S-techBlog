@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    {% include 'Stechblog/head.html' %}
+    <title>{% block title %}     {% endblock %}</title>
+    <br>
+    {% block aff %}
+    
+    {% endblock %}
+    
+<body>
+
+    <div id="wrapper">
+        {% include 'Stechblog/nav.html' %}
+        
+        <section class="section">
+
+            <div class="container">
+                <div class="row">
+                    {% block body %}
+
+                    {% endblock %}
+        
+                    {% include 'Stechblog/advertising.html' %}    
+                </div><!-- end row -->
+            </div><!-- end container -->
+        
+        </section>
+        
+        {% include 'Stechblog/social_media.html' %}
+        {% include 'Stechblog/footer.html' %}
+
+        <div class="dmtop">Scroll to Top</div>
+        
+    </div><!-- end wrapper -->
+
+    <!-- Core JavaScript
+    ================================================== -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/tether.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <!-- ================================================== -->
+    {% include 'Stechblog/ads.html' %}
+    <!-- ================================================== -->
+</body>
+</html>
