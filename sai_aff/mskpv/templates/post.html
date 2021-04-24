@@ -48,8 +48,8 @@ Blog Post
                 <ul>
                 {% for i in object_list %}
                 <p><h1>{{ i.title }}</h1></p>
-                <li>Title : <a href="{% url 'article-details' i.pk %}">{{ i.title }}</a>   Auther: {{ i.author }} Email: {{ i.author.email }} </li>
-                <P><li>{{ i.created_date }}</li></P>
+                <li>Title : <a href="{% url 'article-details' i.pk %}">{{ i.title }}</a>   Auther: {{ i.author }} Email: {{ i.author.email }} - <a href="{% url 'Update_post' i.pk %}">Edit the Post</a></li>
+                <P><li>{{ i.created_date }} </li></P>
                 <P><li>{{ i.body }}</li></P>
                 {% endfor %}
                 </ul>

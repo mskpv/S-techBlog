@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Post
-from .form import Postform
+from .form import Postform ,Editform
 
 # Create your views here.
 def index(request):
@@ -20,6 +20,12 @@ class Addpost_view(CreateView):
     form_class = Postform
     template_name = 'add_blog_post.html'
     #fields = '__all__'
+
+class Updatepost_view(UpdateView):
+    model = Post
+    template_name = 'update_post.html'
+    form_class = Editform
+    #fields = ['title','title_tag','body']
 
 def index_2(request):
     return render(request,'stechblog/index-2.html')

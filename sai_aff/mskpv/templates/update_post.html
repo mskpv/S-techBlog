@@ -5,7 +5,7 @@
 Blog Post
 {% endblock %}
 
-{% block nav %}Add Blog {% endblock %}
+{% block nav %}Update Blog {% endblock %}
 
 {% block body %}
 <section class="section wb">
@@ -20,7 +20,7 @@ Blog Post
                                     {% csrf_token %}
                                     {{ form.as_p}}
                                     
-                                <button type="submit" class="btn btn-primary">Post <i class="fa fa-ok"></i></button>
+                                <button type="submit" class="btn btn-primary">Update<i class="fa fa-ok"></i></button>
                             </form>
                         </div>
                     </div>

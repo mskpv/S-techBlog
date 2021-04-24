@@ -1,6 +1,6 @@
 <h1> {{ post.title}} </h1>
 
-<small>{{ post.author}} - {{ post.created_date }}</small>
+<small>{{ post.author}} - {{ post.created_date }} - <a href="{% url 'Update_post' post.pk %}">Edit the Post</a></small>
 <hr>
 <h2>{{ post.body }}</h2>
 
