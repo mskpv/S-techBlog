@@ -377,11 +377,38 @@
                     <li class="nav-item">
                         <a class="nav-link" href="tech-category-03.html">Reviews</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tech-contact.html">Contact Us</a>
-                    </li>
+                    <!-- =====================================================-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Category
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for cat in cat_menu %}
+                          <a class="dropdown-item" href="{% url 'category' cat|slugify %}">{{ cat }}</a>
+                            {% endfor %}
+                        </div>
+                      </li>
+                    <!-- =====================================================-->
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'addpost' %}">Add Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'add_category' %}">Add Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="tech-contact.html">Contact Us</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mr-2">
