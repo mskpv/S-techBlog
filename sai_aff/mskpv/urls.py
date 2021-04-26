@@ -14,5 +14,6 @@ urlpatterns = [
     path('addcategory/', Addcategory_view.as_view(), name='add_category' ),
     path('category/<str:cats>/', views.Category_view, name='category' ),
     path('article/<int:pk>/delete/', Deletepost_view.as_view(), name='Delete_post' ),
+    path('like/<int:pk>/', views.Likeview, name='like_post' ),
     path('contact/', views.contact_us,name='contact'),
 ]

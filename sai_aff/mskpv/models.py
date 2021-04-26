@@ -22,13 +22,18 @@ class Post(models.Model):
     category = models.CharField(max_length=225, default='Technology')
     body = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
+    likes = models.ManyToManyField(User, related_name='blog_post')
     published_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
         self.published_date = timezone.now()
         self.save()
+
     def approve_comments(self):
         return self.comments.filter(approved_comment=True)
+    
+    def total_likes(self):
+        return self.likes.count()
 
     def get_absolute_url(self):
         return reverse("article-details",kwargs={'pk':self.pk})

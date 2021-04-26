@@ -16,12 +16,16 @@ Blog Post
                     <div class="row">
                         
                         <div class="col-lg-7">
+                            {% if post.author.id == user.id %}
                             <form class="form-wrapper" method="POST">
                                     {% csrf_token %}
                                     {{ form.as_p}}
                                     
                                 <button type="submit" class="btn btn-primary">Update<i class="fa fa-ok"></i></button>
                             </form>
+                            {% else %}
+                             <h1>Ure not owning the post ...</h1>
+                            {% endif %}
                         </div>
                     </div>
                 </div><!-- end page-wrapper -->

@@ -17,9 +17,13 @@ Blog Post
                         
                         <div class="col-lg-7">
                             <h2>Delete {{ post.title }}</h2>
+                            {% if post.author.id == user.id %}
                             <form class="form-wrapper" method="POST">
                                     {% csrf_token %}
-                                    <h2>Are you sure ?! </h2>                                    
+                                    <h2>Are you sure ?! </h2>
+                            {% else %}
+                            <h1>You not allow to perform ... </h1>
+                            {% endif %}                                    
                                 <button type="submit" class="btn btn-primary">Delete<i class="fa fa-delete"></i></button>
                             </form>
                         </div>
