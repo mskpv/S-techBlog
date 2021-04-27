@@ -27,9 +27,9 @@ Blog Post
 
                 <div class="blog-meta big-meta col-md-8">
                     <h4><a href="{% url 'article-details' post.pk %}" title="">{{ post.title }}</a> </h4> 
-                    <P>{{ post.body|slice:":200" | safe }}...</P>
+                    <P>{{ post.snippet }}...</P>
                     <small class="firstsmall"><a class="bg-orange" href="{% url 'category' post.category|slugify %}">{{ post.category }}</a></small>
-                    <small><a href="tech-single.html" title="">21 July, 2017</a></small>
+                    <small><a href="tech-single.html" title="">{{ post.created_date }}</a></small>
                     <small><a href="tech-author.html" title="">by {{ post.author }}</a></small>
                     <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 1114</a></small>
                     {% if user.is_authenticated %}

@@ -17,16 +17,26 @@ class post(ListView):
     #ordering = ['-id']
     def get_context_data(self,*args, **kwargs):
         cat_menu = category.objects.all()
-        stuff = get_object_or_404(Post, id=self.kwargs['pk'])
-        total_likes = stuff.total_likes()
+        #stuff = get_object_or_404(Post, id=self.kwargs['pk'])
+        #total_likes = stuff.total_likes()
         context = super(post,self).get_context_data(*args,**kwargs)
         context['cat_menu'] = cat_menu
-        context['total_likes'] = total_likes
+        #context['total_likes'] = total_likes
         return context
 
 class article(DetailView):
     model = Post
     template_name = 'article.html'
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        likes_connected = get_object_or_404(Post, id=self.kwargs['pk'])
+        liked = False
+        if likes_connected.likes.filter(id=self.request.user.id).exists():
+            liked = True
+        data['number_of_likes'] = likes_connected.number_of_likes()
+        data['post_is_liked'] = liked
+        return data
 
 class Addpost_view(CreateView):
     model = Post
@@ -56,9 +66,11 @@ def Category_view(request,cats):
     return render(request, 'category.html',{'cats':cats.title().replace('-',' '),'category_posts':category_posts})
 
 def Likeview(request,pk):
-    id = request.POST.get('post_id')
-    post = get_object_or_404(Post, id=id )
-    post.likes.add(request.user)
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
     return HttpResponseRedirect(reverse('article-details',args=[str(pk)]))
 
 def index_2(request):

@@ -5,7 +5,7 @@
 Blog Post
 {% endblock %}
 
-{% block nav %}Update Blog {% endblock %}
+{% block nav %}Edit ptofile{% endblock %}
 
 {% block body %}
 <section class="section wb">
@@ -16,17 +16,12 @@ Blog Post
                     <div class="row">
                         
                         <div class="col-lg-7">
-                            {% if post.author.id == user.id %}
                             <form class="form-wrapper" method="POST">
                                     {% csrf_token %}
-                                    {{ form.media }}
-                                    {{ form.as_p }}
+                                    {{ form.as_p}}
                                     
-                                <button type="submit" class="btn btn-primary">Update<i class="fa fa-ok"></i></button>
+                                <button type="submit" class="btn btn-primary">Update Profile <i class="fa fa-ok"></i></button>
                             </form>
-                            {% else %}
-                             <h1>Ure not owning the post ...</h1>
-                            {% endif %}
                         </div>
                     </div>
                 </div><!-- end page-wrapper -->

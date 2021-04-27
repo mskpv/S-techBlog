@@ -18,7 +18,8 @@ Blog Post
                         <div class="col-lg-7">
                             <form class="form-wrapper" method="POST">
                                     {% csrf_token %}
-                                    {{ form.as_p}}
+                                    {{ form.media }}
+                                    {{ form.as_p }}
                                     
                                 <button type="submit" class="btn btn-primary">Post <i class="fa fa-ok"></i></button>
                             </form>

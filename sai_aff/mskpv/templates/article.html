@@ -6,8 +6,20 @@
 
 <form action="{% url 'like_post' post.pk %}" method="POST">
     {% csrf_token %}
-    <button type="submit", name="post_id", value='{{ post.id }}', class="btn btn-primary btn-cm"  >Like </button> {{ total_likes }} Likes
+    {% if user.is_authenticated %}
+    {% if post_is_liked %}
+    <button type="submit" name="post_id" value='{{ post.id }}' class="btn btn-primary btn-cm">Unlike</button>
+    {% else %}
+    <button type="submit" name="post_id" value='{{ post.id }}' class="btn btn-primary btn-cm">Like</button>
+    {% endif %}
 </form>
+    <strong class="text-secondary">{{ number_of_likes }} Like{{ number_of_likes|pluralize }}</strong>
+    {% else %}
+    <small><a class="nav-link" href="{% url 'login' %}">Login</a> to Like</small> 
+    <strong class="text-secondary"> - {{ number_of_likes }} Like{{ number_of_likes|pluralize }}</strong>
+    {% endif %}
+
+
 
 
 <div class="row">
