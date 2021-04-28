@@ -34,7 +34,8 @@ Blog Post
                     <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 1114</a></small>
                     {% if user.is_authenticated %}
                        {% if post.author.id == user.id %}
-                       <small> <a class="bg-orange" href="{% url 'Update_post' post.pk %}">Edit </a>  - <a class="bg-orange" href="{% url 'Delete_post' post.pk %}">Delete </a></small> 
+                       <small><a class="bg-orange" href="{% url 'Update_post' post.pk %}">Edit </a></small>
+                       <small><a class="bg-orange" href="{% url 'Delete_post' post.pk %}">Delete </a></small> 
                     {% endif %}
                     {% endif %}
                     
