@@ -19,7 +19,11 @@ Blog Post
                 <div class="col-md-4">
                     <div class="post-media">
                         <a href="tech-single.html" title="">
+                            {% if post.header_image %}
+                            <img src="{{ post.header_image.url }}" alt=""  class="img-fluid" style="width:300px;height:250px;" >
+                            {% else %}
                             <img src="{% static 'upload/web_server.jpg' %}" alt="" class="img-fluid">
+                            {% endif %}
                             <div class="hovereffect"></div>
                         </a>
                     </div><!-- end media -->

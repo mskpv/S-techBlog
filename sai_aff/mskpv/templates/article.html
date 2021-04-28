@@ -1,5 +1,12 @@
+{% load static %}
 <h1> {{ post.title}} </h1>
 
+        {% if post.header_image %}
+        <img src="{{ post.header_image.url }}" alt=""  class="img-fluid" style="width:800px;height:600px;" >
+        {% else %}
+        <img src="{% static 'upload/web_server.jpg' %}" alt="" class="img-fluid">
+        {% endif %}
+<br>
 <small>{{ post.author}} - {{ post.created_date }} {% if user.is_authenticated %} - <a href="{% url 'Update_post' post.pk %}">Edit the Post</a> - <a href="{% url 'Delete_post' post.pk %}">Delete the Post</a>{% endif %}</small>
 <hr>
 <h2>{{ post.body|safe }}</h2>

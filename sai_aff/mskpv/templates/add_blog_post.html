@@ -16,7 +16,7 @@ Blog Post
                     <div class="row">
                         
                         <div class="col-lg-7">
-                            <form class="form-wrapper" method="POST">
+                            <form class="form-wrapper" method="POST" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     {{ form.media }}
                                     {{ form.as_p }}
