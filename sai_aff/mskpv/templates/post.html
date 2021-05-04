@@ -18,7 +18,7 @@ Blog Post
             <div class="blog-box row">
                 <div class="col-md-4">
                     <div class="post-media">
-                        <a href="tech-single.html" title="">
+                        <a href="{% url 'article-details' post.pk %}" title="">
                             {% if post.header_image %}
                             <img src="{{ post.header_image.url }}" alt=""  class="img-fluid" style="width:300px;height:250px;" >
                             {% else %}
@@ -69,3 +69,4 @@ Blog Post
     </div><!-- end row -->
 </div><!-- end col -->
 {% endblock %}
+

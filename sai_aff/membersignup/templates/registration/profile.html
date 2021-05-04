@@ -16,6 +16,12 @@ Blog Post
                     <div class="row">
                         
                         <div class="col-lg-7">
+                            <p>
+                                <blockquote>    
+                                    {{ user.profile.bio }}
+                                </blockquote>
+                              </p>
+                            <br>
                             <form class="form-wrapper" method="POST">
                                     {% csrf_token %}
                                     {{ form.as_p}}

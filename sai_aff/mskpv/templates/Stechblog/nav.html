@@ -387,9 +387,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'add_category' %}">Add Category</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
-                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Profile
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{% url 'edit_profile' %}">Edit settings</a>
+                          {% if user.profile.id %}
+                          <a class="dropdown-item" href="{% url 'show_edit_profile' user.profile.id %}">Edit Profile</a>
+                          <a class="dropdown-item" href="{% url 'show_profile' user.profile.id %}">Show Profile</a>
+                          {% else %}
+                          <a class="dropdown-item" href="{% url 'create_profile_page' %}">Create Profile</a>
+                          {% endif %}
+                          
+                        </div>
+                      </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                     </li>
