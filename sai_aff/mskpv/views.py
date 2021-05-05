@@ -23,7 +23,7 @@ class post(ListView):
 
 class article(DetailView):
     model = Post
-    template_name = 'article.html'
+    template_name = 'article.html' 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
 
@@ -44,7 +44,6 @@ class Addpost_view(CreateView):
 class AddComment_view(CreateView):
     model = Comment
     form_class = Commentform
-    second_form_class = Replyform
     template_name = 'add_commend.html'
     def form_valid(self,form):
         form.instance.post_id = self.kwargs['pk']
