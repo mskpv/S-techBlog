@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, category
+from .models import Post, category, Comment, Reply
 
 #choices = [('Technology','Technology'),('Entetainment','Entetainment'),('sports','sports'),('Healths','Healths')]
 choices = category.objects.all().values_list('name','name')
@@ -36,4 +36,23 @@ class Editform(forms.ModelForm):
             #'author': forms.Select(attrs={'class': "form-control"}),
             'snippet': forms.Textarea(attrs={'class': "form-control"}),
             'body': forms.Textarea(attrs={'class': "form-control"}),
+        }
+
+class Commentform(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name','body')
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': "form-control"}),
+            'body': forms.Textarea(attrs={'class': "form-control"}),
+        }
+
+class Replyform(forms.ModelForm):
+    class Meta:
+        model = Reply
+        fields = ('reply_body',)
+
+        widgets = {
+            'reply_body': forms.Textarea(attrs={'class': "form-control", "rows":2, "cols": 10}),
         }

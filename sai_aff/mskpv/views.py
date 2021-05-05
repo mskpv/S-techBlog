@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, category
-from .form import Postform ,Editform
+from .models import Post, category, Comment
+from .form import Postform ,Editform, Commentform, Replyform
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-
 
 # Create your views here.
 def index(request):
@@ -13,15 +12,13 @@ def index(request):
 class post(ListView):
     model = Post
     template_name = 'post.html'
+    cats = category.objects.all()
     ordering = ['-created_date']
     #ordering = ['-id']
     def get_context_data(self,*args, **kwargs):
         cat_menu = category.objects.all()
-        #stuff = get_object_or_404(Post, id=self.kwargs['pk'])
-        #total_likes = stuff.total_likes()
-        context = super(post,self).get_context_data(*args,**kwargs)
+        context = super(post,self).get_context_data(*args, **kwargs)
         context['cat_menu'] = cat_menu
-        #context['total_likes'] = total_likes
         return context
 
 class article(DetailView):
@@ -44,6 +41,17 @@ class Addpost_view(CreateView):
     template_name = 'add_blog_post.html'
     #fields = '__all__'
 
+class AddComment_view(CreateView):
+    model = Comment
+    form_class = Commentform
+    second_form_class = Replyform
+    template_name = 'add_commend.html'
+    def form_valid(self,form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
+    success_url = reverse_lazy('post')
+    #fields = '__all__'
+
 class Updatepost_view(UpdateView):
     model = Post
     template_name = 'update_post.html'
@@ -62,8 +70,9 @@ class Addcategory_view(CreateView):
     fields = '__all__'
 
 def Category_view(request,cats):
+    cats_list = category.objects.all()
     category_posts = Post.objects.filter(category=cats.replace('-',' '))
-    return render(request, 'category.html',{'cats':cats.title().replace('-',' '),'category_posts':category_posts})
+    return render(request, 'category.html',{'cats':cats.title().replace('-',' '),'category_posts':category_posts , 'cat_menu': cats_list})
 
 def Likeview(request,pk):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))

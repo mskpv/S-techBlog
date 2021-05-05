@@ -48,7 +48,7 @@ Blog Post
                 <ul>
                 {% for i in category_posts %}
                 <p><h1>{{ i.title }}</h1></p>
-                <li>Title : <a href="{% url 'article-details' i.pk %}">{{ i.title }}</a>   Auther: {{ i.author }}, Email: {{ i.author.email }} {% if user.is_authenticated %} - <a href="{% url 'Update_post' i.pk %}">Edit </a> - <a href="{% url 'Delete_post' i.pk %}">Delete </a>{% endif %}</li>
+                <li>Title : <a href="{% url 'article-details' i.pk %}">{{ i.title }}</a>   Auther: {{ i.author }}, Email: {{ i.author.email }} {% if user.is_authenticated %}{% if post.author.id == user.id %} - <a href="{% url 'Update_post' i.pk %}">Edit </a> - <a href="{% url 'Delete_post' i.pk %}">Delete </a>{% endif %}{% endif %}</li>
                 <P><li>{{ i.created_date }} </li></P>
                 <P>{{ i.body|slice:":200" | safe }}...</P>
                 {% endfor %}

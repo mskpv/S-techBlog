@@ -1,0 +1,38 @@
+{% extends 'Stechblog/base_contact.html' %}
+{% load static %}
+
+{% block title %} 
+Blog Post
+{% endblock %}
+
+{% block nav %}Add Commends {% endblock %}
+
+{% block body %}
+<section class="section wb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-wrapper">
+                    <div class="row">
+                        
+                        <div class="col-lg-7">
+                            <form class="form-wrapper" method="POST">
+                                    {% csrf_token %}
+                                    
+                                    {{ form.as_p }}
+                                    
+                                <button type="submit" class="btn btn-primary">Post <i class="fa fa-ok"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- end page-wrapper -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+    <script>
+        var name = "{{ user.id }}";
+        document.getElementById('author_name').value = name;
+    </script>
+</section>
+
+{% endblock %}

@@ -68,3 +68,15 @@ class Comment(models.Model):
 
     def __str__(self):
         return '%s - %s' % (self.post.title, self.name)
+    
+    class Meta:
+        ordering = ['-date_added']
+
+class Reply(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies')
+    reply_body = models.TextField(max_length=500)
+    name = models.ForeignKey(User,on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "reply to " + str(self.Comment.name)
