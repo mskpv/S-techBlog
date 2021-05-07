@@ -1,8 +1,10 @@
 from django.db import models
+from django.db.models.signals import pre_save
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
 from ckeditor.fields import RichTextField
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -36,8 +38,9 @@ class Post(models.Model):
     header_image = models.ImageField(null=True, blank=True, upload_to='images/')
     title_tag = models.CharField(max_length=225, default= 'S-Tech blog')
     author = models.ForeignKey(User,on_delete=models.CASCADE)
-    category = models.CharField(max_length=225, default='Technology')
-    snippet = models.CharField(max_length=225, default='Click link above to read more ...')
+    category = models.CharField(max_length=225, default='---')
+    snippet = models.CharField(max_length=225)
+    slug = models.SlugField(max_length = 250, null = True, blank = True, unique=True)
     body = RichTextField(blank=True, null=True)
     #body = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -59,6 +62,23 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title + ' | ' + str(self.author)
+
+def create_slug(instance, new_slug=None):
+    slug = slugify(instance.title)
+    if new_slug is not None:
+        slug = new_slug
+    qs = Post.objects.filter(slug=slug,).order_by("-id")
+    exists  = qs.exists()
+    if exists:
+        slug = "%s-%s" %(slug, qs.first().id)
+        return create_slug(instance, new_slug=new_slug)
+    return slug
+
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    if instance.slug:
+        instance.slug = create_slug(instance)
+
+pre_save.connect(pre_save_post_receiver, sender=Post)
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
