@@ -4,6 +4,9 @@
 {% block title %} 
 Blog Post
 {% endblock %}
+
+{% block nav %}Add Blog {% endblock %}
+
 {% block body %}
 <section class="section wb">
     <div class="container">
@@ -13,9 +16,10 @@ Blog Post
                     <div class="row">
                         
                         <div class="col-lg-7">
-                            <form class="form-wrapper" method="POST">
+                            <form class="form-wrapper" method="POST" enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    {{ form.as_p}}
+                                    {{ form.media }}
+                                    {{ form.as_p }}
                                     
                                 <button type="submit" class="btn btn-primary">Post <i class="fa fa-ok"></i></button>
                             </form>
@@ -25,6 +29,10 @@ Blog Post
             </div><!-- end col -->
         </div><!-- end row -->
     </div><!-- end container -->
+    <script>
+        var name = "{{ user.id }}";
+        document.getElementById('author_name').value = name;
+    </script>
 </section>
 
 {% endblock %}
