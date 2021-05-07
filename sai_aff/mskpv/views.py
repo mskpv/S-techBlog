@@ -24,6 +24,17 @@ class post(ListView):
 class article(DetailView):
     model = Post
     template_name = 'article.html' 
+    form = Commentform
+
+    def post(self,request,*args, **kwargs):
+        form = Commentform(request.POST)
+        if form.is_valid():
+            post = self.get_object()
+            form.instance.user = request.user
+            form.instance.post = post
+            form.save()
+            return HttpResponseRedirect(reverse('article-details',args=[str(post.pk)]))
+
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
 
@@ -33,6 +44,7 @@ class article(DetailView):
             liked = True
         data['number_of_likes'] = likes_connected.number_of_likes()
         data['post_is_liked'] = liked
+        data['form'] = self.form
         return data
 
 class Addpost_view(CreateView):
