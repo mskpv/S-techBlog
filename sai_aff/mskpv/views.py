@@ -53,7 +53,7 @@ class Addpost_view(CreateView):
     template_name = 'add_blog_post.html'
     #fields = '__all__'
 
-class AddComment_view(CreateView):
+
     model = Comment
     form_class = Commentform
     template_name = 'add_commend.html'
