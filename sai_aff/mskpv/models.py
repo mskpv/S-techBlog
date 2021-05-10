@@ -94,10 +94,10 @@ class Comment(models.Model):
         ordering = ['-date_added']
 
 class Reply(models.Model):
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies')
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, blank=True, related_name='replies')
     reply_body = models.TextField(max_length=500)
-    name = models.ForeignKey(User,on_delete=models.CASCADE)
+    #name = models.ForeignKey(User,on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "reply to " + str(self.Comment.name)
+        return "reply to " + str(self.comment)

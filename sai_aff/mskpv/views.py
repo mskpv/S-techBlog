@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, category, Comment
+from .models import Post, category, Comment, Reply
 from .form import Postform ,Editform, Commentform, Replyform
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
@@ -25,19 +25,29 @@ class article(DetailView):
     model = Post
     template_name = 'article.html' 
     form = Commentform
+    formr = Replyform
 
     def post(self,request,*args, **kwargs):
         form = Commentform(request.POST)
+        formr = Replyform(request.POST)
         if form.is_valid():
             post = self.get_object()
             form.instance.user = request.user
             form.instance.post = post
             form.save()
             return HttpResponseRedirect(reverse('article-details',args=[str(post.pk)]))
+        if formr.is_valid():
+            post = self.get_object()
+            formr.instance.comment_id = request.POST['comment']
+            formr.instance.post = post
+            formr.save()
+            return HttpResponseRedirect(reverse('article-details',args=[str(post.pk)]))
+
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
 
+        reply = Reply.Objects.all()
         likes_connected = get_object_or_404(Post, id=self.kwargs['pk'])
         liked = False
         if likes_connected.likes.filter(id=self.request.user.id).exists():
@@ -45,6 +55,8 @@ class article(DetailView):
         data['number_of_likes'] = likes_connected.number_of_likes()
         data['post_is_liked'] = liked
         data['form'] = self.form
+        data['formr'] = self.formr
+        data['reply'] = reply
         return data
 
 class Addpost_view(CreateView):
@@ -54,14 +66,6 @@ class Addpost_view(CreateView):
     #fields = '__all__'
 
 
-    model = Comment
-    form_class = Commentform
-    template_name = 'add_commend.html'
-    def form_valid(self,form):
-        form.instance.post_id = self.kwargs['pk']
-        return super().form_valid(form)
-    success_url = reverse_lazy('post')
-    #fields = '__all__'
 
 class Updatepost_view(UpdateView):
     model = Post
