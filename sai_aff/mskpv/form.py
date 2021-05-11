@@ -52,9 +52,8 @@ class Commentform(forms.ModelForm):
 class Replyform(forms.ModelForm):
     class Meta:
         model = Reply
-        fields = ('comment','reply_body',)
+        fields = ('reply_body',)
 
         widgets = {
             'reply_body': forms.Textarea(attrs={'class': "form-control", "rows":2, "cols": 10}),
-            'comment': forms.TextInput(attrs={'class': "form-control",'value': '', 'id':'comment_name', 'type':'hidden'}),
         }

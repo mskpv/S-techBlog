@@ -41,13 +41,13 @@ class article(DetailView):
             formr.instance.comment_id = request.POST['comment']
             formr.instance.post = post
             formr.save()
+            print(request.POST)
             return HttpResponseRedirect(reverse('article-details',args=[str(post.pk)]))
 
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
 
-        reply = Reply.Objects.all()
         likes_connected = get_object_or_404(Post, id=self.kwargs['pk'])
         liked = False
         if likes_connected.likes.filter(id=self.request.user.id).exists():
@@ -56,7 +56,6 @@ class article(DetailView):
         data['post_is_liked'] = liked
         data['form'] = self.form
         data['formr'] = self.formr
-        data['reply'] = reply
         return data
 
 class Addpost_view(CreateView):
