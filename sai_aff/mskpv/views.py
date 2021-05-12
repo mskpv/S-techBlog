@@ -12,6 +12,7 @@ def index(request):
 class post(ListView):
     model = Post
     template_name = 'post.html'
+    paginate_by = 9
     cats = category.objects.all()
     ordering = ['-created_date']
     #ordering = ['-id']
