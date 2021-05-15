@@ -4,6 +4,7 @@ from .models import Post, category, Comment, Reply
 from .form import Postform ,Editform, Commentform, Replyform
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def index(request):
@@ -87,6 +88,14 @@ class Addcategory_view(CreateView):
 def Category_view(request,cats):
     cats_list = category.objects.all()
     category_posts = Post.objects.filter(category=cats.replace('-',' '))
+    page = request.GET.get('page', 1)
+    paginator = Paginator(category_posts, 9)
+    try:
+        category_posts = paginator.page(page)
+    except PageNotAnInteger:
+        category_posts = paginator.page(1)
+    except EmptyPage:
+        category_posts = paginator.page(paginator.num_pages)
     return render(request, 'category.html',{'cats':cats.title().replace('-',' '),'category_posts':category_posts , 'cat_menu': cats_list})
 
 def Likeview(request,pk):
