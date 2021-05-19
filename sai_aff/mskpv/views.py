@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, category, Comment, Reply
+from .models import Post, category, Comment, Reply, Sendmail
 from .form import Postform ,Editform, Commentform, Replyform
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
@@ -110,4 +110,10 @@ def index_2(request):
     return render(request,'stechblog/index-2.html')
 
 def contact_us(request):
+    if request.method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        body = request.POST['body']
+        Sendmail(name=name, subject=subject, email=email, body=body).save()
     return render(request,'stechblog/Contact-us.html')

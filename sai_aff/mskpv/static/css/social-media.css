@@ -14,9 +14,18 @@
         flex-direction: column;
         align-items: flex-start;
         min-height: 30px;
-        font-size: 12px;
-        padding: 20px 10px;
+        font-size: 15px;
+        padding: 20px 15px;
     }
+
+.hide_soc {
+      opacity:0;
+     
+  }
+  .show_soc {
+      opacity:1;
+    
+  }
 
   
   .icon-bar a:hover {
@@ -52,3 +61,32 @@
     margin-left: 75px;
     font-size: 30px;
   }
+
+  #div-desktop {
+    display: none;
+  }
+  
+  @media screen and (min-width: 701px) {
+    #div-mobile {
+      display: none;
+    }
+    #div-desktop {
+      display: block;
+    }
+  }
+
+  .icon-mob {
+    margin: auto;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  .icon-mob a {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 30px;
+    font-size: 12px;
+    padding: 20px 20px;
+}

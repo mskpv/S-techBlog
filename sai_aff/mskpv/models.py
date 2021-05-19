@@ -101,3 +101,13 @@ class Reply(models.Model):
 
     def __str__(self):
         return "reply to " + str(self.comment)
+
+class Sendmail(models.Model):
+    name = models.CharField(max_length=225)
+    subject = models.CharField(max_length=225)
+    email = models.EmailField()
+    body = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s' % (self.subject)
