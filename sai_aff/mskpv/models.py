@@ -111,3 +111,9 @@ class Sendmail(models.Model):
 
     def __str__(self):
         return '%s' % (self.subject)
+
+class Emailsubscription(models.Model):
+    email_sub = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.email_sub

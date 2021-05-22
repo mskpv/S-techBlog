@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, category, Comment, Reply, Sendmail
-from .form import Postform ,Editform, Commentform, Replyform
+from .models import Post, category, Comment, Reply, Sendmail, Emailsubscription
+from .form import Postform ,Editform, Commentform, Replyform, sub_email
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -117,3 +117,12 @@ def contact_us(request):
         body = request.POST['body']
         Sendmail(name=name, subject=subject, email=email, body=body).save()
     return render(request,'stechblog/Contact-us.html')
+
+def subscription(request):
+
+    form = sub_email()
+    if request.method == "POST":
+        if form.is_valid():
+            id = request.POST['email_sub']
+            Emailsubscription(email_sub=id).save()
+    return render(request, 'subscription.html')

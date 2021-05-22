@@ -1,5 +1,8 @@
 from django import forms
-from .models import Post, category, Comment, Reply
+from django.db import models
+from django.db.models import fields
+from django.forms import widgets
+from .models import Post, category, Comment, Reply, Emailsubscription
 
 #choices = [('Technology','Technology'),('Entetainment','Entetainment'),('sports','sports'),('Healths','Healths')]
 choices = category.objects.all().values_list('name','name')
@@ -56,4 +59,16 @@ class Replyform(forms.ModelForm):
 
         widgets = {
             'reply_body': forms.Textarea(attrs={'class': "form-control", "rows":2, "cols": 10}),
+        }
+
+class sub_email(forms.ModelForm):
+    class Meta:
+        model = Emailsubscription
+        fields = ('email_sub',)
+
+        widgets = {
+            'email_sub': forms.EmailInput(attrs={'class': "form-control",'placeholder':"Enter your email address"}),
+        }
+        labels = {
+           'email_sub' : '',
         }

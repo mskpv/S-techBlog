@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views
 from . import views
-from .views import post, article, Addpost_view, Updatepost_view, Deletepost_view, Addcategory_view #, AddComment_view
+from .views import post, article, Addpost_view, Updatepost_view, Deletepost_view, Addcategory_view, subscription #, AddComment_view
 
 
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
     #path('article/<int:pk>/commend/', AddComment_view.as_view(), name='Add_comment' ),
     path('like/<int:pk>/', views.Likeview, name='like_post' ),
     path('contact/', views.contact_us,name='contact'),
+    path('subscription/', views.subscription,name='subscription'),
 ]

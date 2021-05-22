@@ -18,8 +18,9 @@
                                 <hr class="invis">
 
                                 <div class="newsletter-widget text-left">
-                                    <form class="form-inline">
-                                        <input type="email" class="form-control" placeholder="Enter your email address" required="">
+                                    <form method="POST" class="form-inline" action="{% url 'subscription' %}">
+                                        {% csrf_token %}
+                                         {{ sub_form }}
                                         <button type="submit" class="btn btn-primary">SUBMIT</button>
                                     </form>
                                 </div><!-- end newsletter -->
