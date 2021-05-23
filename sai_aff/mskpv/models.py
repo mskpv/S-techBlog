@@ -32,6 +32,10 @@ class category(models.Model):
     def get_absolute_url(self):
         return reverse('post')
 
+STATUS = (
+    (0,"Draft"),
+    (1,"Publish")
+)
 
 class Post(models.Model):
     title = models.CharField(max_length=225)
@@ -43,9 +47,10 @@ class Post(models.Model):
     slug = models.SlugField(max_length = 250, null = True, blank = True, unique=True)
     body = RichTextField(blank=True, null=True)
     #body = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
-    likes = models.ManyToManyField(User, related_name='like_post')
-    published_date = models.DateTimeField(blank=True, null=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    likes = models.ManyToManyField(User, related_name='like_post',blank=True)
+    published_date = models.DateTimeField(auto_now= True)
+    status = models.IntegerField(choices=STATUS, default=0)
 
     def publish(self):
         self.published_date = timezone.now()
@@ -75,8 +80,16 @@ def create_slug(instance, new_slug=None):
     return slug
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
-    if instance.slug:
-        instance.slug = create_slug(instance)
+    #---------------
+    slug = slugify(instance.title)
+    qs = Post.objects.filter(slug=slug,).order_by("-id")
+    exists  = qs.exists()
+    print(qs.first(), '-------------------------------')
+    if exists:
+        slug = "%s-%s" %(slug, qs.first().id)
+    #---------------
+    print(slug)
+    instance.slug = slug
 
 pre_save.connect(pre_save_post_receiver, sender=Post)
 

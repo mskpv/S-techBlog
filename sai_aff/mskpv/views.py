@@ -12,6 +12,7 @@ def index(request):
 
 class post(ListView):
     model = Post
+    queryset = Post.objects.filter(status=1)
     template_name = 'post.html'
     paginate_by = 9
     cats = category.objects.all()
@@ -126,3 +127,16 @@ def subscription(request):
             id = request.POST['email_sub']
             Emailsubscription(email_sub=id).save()
     return render(request, 'subscription.html')
+
+def userpost_view(request,state):
+    status_posts = Post.objects.filter(status=state).order_by('-created_date')
+    page = request.GET.get('page', 1)
+    #page = request.GET.get('page')
+    paginator = Paginator(status_posts, 10)
+    try:
+        status_posts = paginator.page(page)
+    except PageNotAnInteger:
+        status_posts = paginator.page(1)
+    except EmptyPage:
+        status_posts = paginator.page(paginator.num_pages)
+    return render(request, 'user_post.html',{ 'page':page,'category_posts':status_posts})
