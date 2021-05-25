@@ -1,0 +1,30 @@
+{% load static %}
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/tether.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'js/1.7.1_jqurey.js' %}"></script>
+<script src="{% static 'js/1.8.16_jquery-ui.js' %}"></script>
+<script>
+    $( function() {
+      var availableTags = [
+          {% for category_search in category_search %}
+              "{{category_search.name}}",
+          {% endfor %}
+      ];
+      $( "#tags" ).autocomplete({
+        source: availableTags
+      });
+    } );
+</script>
+<script>
+    function fn1(){
+        var pars_cat = document.getElementById('tags').value;
+        var domain = "{{ host }}";
+        if ( pars_cat === '' || pars_cat === null){
+            pars_cat = 'nothing'
+        }
+        document.getElementById('search_cat').action = "http://"+domain+"/category/"+pars_cat;
+    }
+</script>
