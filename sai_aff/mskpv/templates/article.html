@@ -1,5 +1,8 @@
 {% extends 'Stechblog/base.html' %}
 {% load static %}
+{% block title %} 
+{{ post.title}}
+{% endblock %}
 {% block body %}
 
 
@@ -17,14 +20,14 @@
                                 <h3>{{ post.title}}</h3> 
 
                                 <div class="blog-meta big-meta">
-                                    <small><a href="tech-single.html" title="">{{ post.created_date }}</a></small>
-                                    <small><a href="tech-author.html" title="">{{ post.author }}</a></small>
+                                    <small><a href="#" title="">{{ post.created_date|date:"D M Y"  }}</a></small>
+                                    <small><a href="{% url 'show_profile' post.author.profile.id  %}" title="">{{ post.author }}</a></small>
                                     <small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
                                 </div><!-- end meta -->
 
                                 <div class="post-sharing">
                                     <ul class="list-inline">
-                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                        <li><a href="http://www.facebook.com/share.php?u=http://127.0.0.1:8000{% url 'article-details' post.id %}}&amp;t=cool" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
                                         <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
                                         <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
                                     </ul>
@@ -57,7 +60,7 @@
                                 {% endif %}
                                 <strong class="text-secondary">  {{ number_of_likes }} Like{{ number_of_likes|pluralize }}</strong>
                                 {% else %}
-                                <small><a class="nav-link" href="{% url 'login' %}">Login</a> to Like</small> 
+                                <strong><a class="nav-link" href="{% url 'login' %}">Login</a> To Like </strong> 
                                 <strong class="text-secondary"> - {{ number_of_likes }}  Like{{ number_of_likes|pluralize }}</strong>
                                 {% endif %}
                             </form>
@@ -67,7 +70,7 @@
                                 <div class="col-lg-12">
                                     <div class="banner-spot clearfix">
                                         <div class="banner-img">
-                                            <img src="{% static 'upload/banner_01.jpg' %}" alt="" class="img-fluid">
+                                            <img src="{% static 'images/banner1.gif' %}" alt="" class="img-fluid">
                                         </div><!-- end banner-img -->
                                     </div><!-- end banner -->
                                 </div><!-- end col -->
@@ -82,7 +85,7 @@
                                         {% if post.author.profile.profile_pic %}
                                      <img src="{{ post.author.profile.profile_pic.url }}" alt="" width="100" height="100" class="img-fluid rounded-circle" >
                                         {% else %}
-                                    <img src="{% static 'upload/web_server.jpg' %}" alt=""  width="100" height="100" class="img-fluid rounded-circle" >
+                                    <img src="{% static 'images/Blog_Person.png' %}" alt=""  width="100" height="100" class="img-fluid rounded-circle" >
                                         {% endif %}
                                     </div><!-- end col -->
 
@@ -108,7 +111,7 @@
 
                             
                             <div class="custombox clearfix">
-                                <h4 class="small-title">3 Comments</h4>
+                                <h3 class="small-title">{{ post.comments.count }} Comments</h3>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="comments-list">
@@ -118,12 +121,28 @@
                                             {% for comment in post.comments.all %}
                                             <div class="media">
                                                 <a class="media-left" href="#">
-                                                    <img src="upload/author.jpg" alt="" class="rounded-circle">
+                                                    <img src="{% static 'images/Blog_Person.png' %}" alt="" class="rounded-circle">
                                                 </a>
                                                 <div class="media-body">
                                                     <h4 class="media-heading user_name">{{ comment.name }} <small>{{ comment.date_added }}</small></h4>
                                                     <p>{{ comment.body }}</p>
-                                                    <a href="#" class="btn btn-primary btn-sm">Reply</a>
+                                                    <p>||==========Replys===========||</p>
+                                                    {% if comment.replies.all %}
+                                                    <h5>response:</h5>
+                                                    {% for reply in comment.replies.all %}
+                                                    <p><i class="fas fa-reply"></i>==> {{ reply.reply_body }}</p>
+                                                    {% endfor %}
+                                                    {% endif %}
+                                                    <form action="{% url 'article-details' post.pk %}" method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="comment" class="form-control" value="{{ comment.id }}">
+                                                        {{ formr.as_p}}
+                                                        <button type="submit" class="btn btn-primary">Reply <i class="fa fa-ok"></i></button>
+                                                    </form>
+                                                    <script>
+                                                        var name = "{{ comment.id }}";
+                                                        document.getElementById('comment_name').value = name;
+                                                    </script>
                                                 </div>
                                             </div>
                                             {% endfor %}
@@ -139,7 +158,12 @@
                                 <h4 class="small-title">Add Comment</h4>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                       <h1><a href="{% url 'Add_comment' post.pk %}">Add Comment ...</a></h1>
+                                       <form action="{% url 'article-details' post.pk %}" method="POST">
+                                           {% csrf_token %}
+                                           {{ form.as_p}}
+                                    
+                                           <button type="submit" class="btn btn-primary">Add Comments <i class="fa fa-ok"></i></button>
+                                       </form>
                                     </div>
                                 </div>
                             </div>

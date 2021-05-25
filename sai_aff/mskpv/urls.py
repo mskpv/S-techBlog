@@ -1,12 +1,13 @@
 from django.urls import path
 from django.contrib.auth import views
 from . import views
-from .views import post, article, Addpost_view, Updatepost_view, Deletepost_view, Addcategory_view, AddComment_view
+from .views import post, article, Addpost_view, Updatepost_view, Deletepost_view, Addcategory_view, subscription, userpost_view #, AddComment_view
 
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('2/', views.index_2, name='2'),
+    #path('', views.index, name='index'),
+    #path('2/', views.index_2, name='2'),
+    path('', post.as_view(), name='index' ),
     path('post/', post.as_view(), name='post' ),
     path('article/<int:pk>/', article.as_view(), name='article-details' ),
     path('addpost/',Addpost_view.as_view(), name = 'addpost'),
@@ -14,7 +15,10 @@ urlpatterns = [
     path('addcategory/', Addcategory_view.as_view(), name='add_category' ),
     path('category/<str:cats>/', views.Category_view, name='category' ),
     path('article/<int:pk>/delete/', Deletepost_view.as_view(), name='Delete_post' ),
-    path('article/<int:pk>/commend/', AddComment_view.as_view(), name='Add_comment' ),
+    #path('article/<int:pk>/commend/', AddComment_view.as_view(), name='Add_comment' ),
     path('like/<int:pk>/', views.Likeview, name='like_post' ),
     path('contact/', views.contact_us,name='contact'),
+    path('subscription/', views.subscription,name='subscription'),
+    path('mypost/<int:state>/', views.userpost_view, name='mypost' ),
+
 ]

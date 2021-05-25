@@ -5,7 +5,7 @@
 Blog Post
 {% endblock %}
 
-{% block nav %}Author by: {{ page_user }}{% endblock %}
+{% block nav %}Author by: {{ page_user|title }}{% endblock %}{% block trm %} Need to know about the author{% endblock %}
 
 {% block body %}
 <section class="section wb">
@@ -24,7 +24,7 @@ Blog Post
                                                 {% if page_user.profile_pic %}
                                              <img src="{{ page_user.profile_pic.url }}" alt="" width="100" height="100" class="img-fluid rounded-circle" >
                                                 {% else %}
-                                            <img src="{% static 'upload/web_server.jpg' %}" alt=""  width="100" height="100" class="img-fluid rounded-circle" >
+                                            <img src="{% static 'images/Blog_Person.png' %}" alt=""  width="100" height="100" class="img-fluid rounded-circle" >
                                                 {% endif %}
                                             </div><!-- end col -->
         

@@ -20,11 +20,10 @@
                     {% block body %}
 
                     {% endblock %}
-        
+                    {% include 'Stechblog/social_media_mob.html' %}
                     {% include 'Stechblog/advertising.html' %}    
                 </div><!-- end row -->
-            </div><!-- end container -->
-        
+            </div><!-- end container -->            
         </section>
         
         {% include 'Stechblog/social_media.html' %}
@@ -36,10 +35,7 @@
 
     <!-- Core JavaScript
     ================================================== -->
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/tether.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/custom.js' %}"></script>
+    {% include 'Stechblog/javascript.html' %}
     <!-- ================================================== -->
     {% include 'Stechblog/ads.html' %}
     <!-- ================================================== -->

@@ -1,0 +1,36 @@
+{% extends 'Stechblog/base_contact.html' %}
+{% load static %}
+
+{% block title %} 
+subscription
+{% endblock %}
+
+{% block nav %}Thanks for subscribing{% endblock %}
+
+{% block body %}
+<section class="section wb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-wrapper">
+                    <div class="row">
+                        
+                        <div class="col-lg-7">
+                            <h2>Subscription</h2>
+                            <img src="{% static 'images/thank-you-message-technology.jpg' %}" alt="" height="300">
+                        </div>
+                    </div>
+                </div><!-- end page-wrapper -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section>
+<script>
+    if ( window.history.replaceState ) {
+      window.history.replaceState( null, null, window.location.href );
+    }
+    </script>
+{% endblock %}
+
+
+

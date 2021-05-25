@@ -67,3 +67,18 @@ function openCategory(evt, catName) {
     document.getElementById(catName).style.display = "block";
     evt.currentTarget.className += " active";
 } 
+
+// Done by Prabhuraj.Murugesan
+
+myID = document.getElementById("div-desktop");
+
+var myScrollFunc = function () {
+    var y = window.scrollY;
+    if (y >= 300) {
+        myID.className = "icon-bar show_soc"
+    } else {
+        myID.className = "icon-bar hide_soc"
+    }
+};
+
+window.addEventListener("scroll", myScrollFunc);

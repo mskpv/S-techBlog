@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, category, Comment
-from .form import Postform ,Editform, Commentform, Replyform
+from .models import Post, category, Comment, Reply, Sendmail, Emailsubscription
+from .form import Postform ,Editform, Commentform, Replyform, sub_email
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def index(request):
@@ -11,7 +12,9 @@ def index(request):
 
 class post(ListView):
     model = Post
+    queryset = Post.objects.filter(status=1)
     template_name = 'post.html'
+    paginate_by = 9
     cats = category.objects.all()
     ordering = ['-created_date']
     #ordering = ['-id']
@@ -24,6 +27,27 @@ class post(ListView):
 class article(DetailView):
     model = Post
     template_name = 'article.html' 
+    form = Commentform
+    formr = Replyform
+
+    def post(self,request,*args, **kwargs):
+        form = Commentform(request.POST)
+        formr = Replyform(request.POST)
+        if form.is_valid():
+            post = self.get_object()
+            form.instance.user = request.user
+            form.instance.post = post
+            form.save()
+            return HttpResponseRedirect(reverse('article-details',args=[str(post.pk)]))
+        if formr.is_valid():
+            post = self.get_object()
+            formr.instance.comment_id = request.POST['comment']
+            formr.instance.post = post
+            formr.save()
+            print(request.POST)
+            return HttpResponseRedirect(reverse('article-details',args=[str(post.pk)]))
+
+
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
 
@@ -33,6 +57,8 @@ class article(DetailView):
             liked = True
         data['number_of_likes'] = likes_connected.number_of_likes()
         data['post_is_liked'] = liked
+        data['form'] = self.form
+        data['formr'] = self.formr
         return data
 
 class Addpost_view(CreateView):
@@ -41,15 +67,7 @@ class Addpost_view(CreateView):
     template_name = 'add_blog_post.html'
     #fields = '__all__'
 
-class AddComment_view(CreateView):
-    model = Comment
-    form_class = Commentform
-    template_name = 'add_commend.html'
-    def form_valid(self,form):
-        form.instance.post_id = self.kwargs['pk']
-        return super().form_valid(form)
-    success_url = reverse_lazy('post')
-    #fields = '__all__'
+
 
 class Updatepost_view(UpdateView):
     model = Post
@@ -71,6 +89,14 @@ class Addcategory_view(CreateView):
 def Category_view(request,cats):
     cats_list = category.objects.all()
     category_posts = Post.objects.filter(category=cats.replace('-',' '))
+    page = request.GET.get('page', 1)
+    paginator = Paginator(category_posts, 9)
+    try:
+        category_posts = paginator.page(page)
+    except PageNotAnInteger:
+        category_posts = paginator.page(1)
+    except EmptyPage:
+        category_posts = paginator.page(paginator.num_pages)
     return render(request, 'category.html',{'cats':cats.title().replace('-',' '),'category_posts':category_posts , 'cat_menu': cats_list})
 
 def Likeview(request,pk):
@@ -85,4 +111,32 @@ def index_2(request):
     return render(request,'stechblog/index-2.html')
 
 def contact_us(request):
+    if request.method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        body = request.POST['body']
+        Sendmail(name=name, subject=subject, email=email, body=body).save()
     return render(request,'stechblog/Contact-us.html')
+
+def subscription(request):
+
+    form = sub_email()
+    if request.method == "POST":
+        if form.is_valid():
+            id = request.POST['email_sub']
+            Emailsubscription(email_sub=id).save()
+    return render(request, 'subscription.html')
+
+def userpost_view(request,state):
+    status_posts = Post.objects.filter(status=state).order_by('-created_date')
+    page = request.GET.get('page', 1)
+    #page = request.GET.get('page')
+    paginator = Paginator(status_posts, 10)
+    try:
+        status_posts = paginator.page(page)
+    except PageNotAnInteger:
+        status_posts = paginator.page(1)
+    except EmptyPage:
+        status_posts = paginator.page(paginator.num_pages)
+    return render(request, 'user_post.html',{ 'page':page,'category_posts':status_posts})

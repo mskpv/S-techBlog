@@ -21,12 +21,12 @@
                                     <p>Fusce dapibus nunc quis quam tempor vestibulum sit amet consequat enim. Pellentesque blandit hendrerit placerat. Integertis non.</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <form class="form-wrapper">
-                                        <input type="text" class="form-control" placeholder="Your name">
-                                        <input type="text" class="form-control" placeholder="Email address">
-                                        <input type="text" class="form-control" placeholder="Phone">
-                                        <input type="text" class="form-control" placeholder="Subject">
-                                        <textarea class="form-control" placeholder="Your message"></textarea>
+                                    <form class="form-wrapper" method="POST">
+                                        {% csrf_token %}
+                                        <input type="text" class="form-control" name="name" placeholder="Your name" required>
+                                        <input type="email" class="form-control" name="email" placeholder="Email address" required>
+                                        <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                                        <textarea class="form-control" name="body" placeholder="Your message" required></textarea>
                                         <button type="submit" class="btn btn-primary">Send <i class="fa fa-envelope-open-o"></i></button>
                                     </form>
                                 </div>
