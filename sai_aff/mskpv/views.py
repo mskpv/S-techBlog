@@ -5,6 +5,8 @@ from .form import Postform ,Editform, Commentform, Replyform, sub_email
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import pandas as pd
+import os
 
 # Create your views here.
 def index(request):
@@ -109,6 +111,22 @@ def Likeview(request,pk):
 
 def index_2(request):
     return render(request,'stechblog/index-2.html')
+
+def amazon_post(request):
+    module_dir = os.path.dirname(__file__)  
+    file_path = os.path.join(module_dir, 'gaming laptop.csv')
+    data = pd.read_csv(file_path)
+    data = data.values
+    title = 'Top Gaming Laptop to Buy in 2021'
+    return render(request,'amazon_ads.html',{'data':data, 'title': title})
+
+def amazon_mobiles(request):
+    module_dir = os.path.dirname(__file__)  
+    file_path = os.path.join(module_dir, 'mobiles below 10000.csv')
+    data = pd.read_csv(file_path)
+    data = data.values
+    title = 'Mobile phones under 10,000'
+    return render(request,'amazon_ads.html',{'data':data, 'title': title})
 
 def contact_us(request):
     if request.method == "POST":

@@ -20,5 +20,6 @@ urlpatterns = [
     path('contact/', views.contact_us,name='contact'),
     path('subscription/', views.subscription,name='subscription'),
     path('mypost/<int:state>/', views.userpost_view, name='mypost' ),
-
+    path('amazon_post/', views.amazon_post, name='amazon_post' ),
+    path('amazon_mobiles/', views.amazon_mobiles, name='amazon_mobiles' ),
 ]
