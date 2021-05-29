@@ -126,7 +126,15 @@ def amazon_mobiles(request):
     data = pd.read_csv(file_path)
     data = data.values
     title = 'Mobile phones under 10,000'
-    return render(request,'amazon_ads.html',{'data':data, 'title': title})
+    return render(request,'amazon_ads1.html',{'data':data, 'title': title})
+
+def amazon_gift(request):
+    module_dir = os.path.dirname(__file__)  
+    file_path = os.path.join(module_dir, 'tech gifts.csv')
+    data = pd.read_csv(file_path)
+    data = data.values
+    title = 'Useful tech gifts to buy on Amazon at any budget'
+    return render(request,'amazon_ads1.html',{'data':data, 'title': title})
 
 def contact_us(request):
     if request.method == "POST":

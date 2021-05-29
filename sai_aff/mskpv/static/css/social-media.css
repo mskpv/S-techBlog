@@ -75,6 +75,19 @@
     }
   }
 
+  #div-desktop_am {
+    display: none;
+  }
+  
+  @media screen and (min-width: 701px) {
+    #div-mobile_am {
+      display: none;
+    }
+    #div-desktop_am {
+      display: block;
+    }
+  }
+  
   .icon-mob {
     margin: auto;
     top: 50%;

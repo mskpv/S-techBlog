@@ -11,7 +11,8 @@ def get_asins(search):
 
 def getdata(asin):
     try:
-       r = s.get(f'https://www.amazon.in/dp/{asin}')
+       url = f'https://www.amazon.in/dp/{asin}'
+       r = s.get(url)
        #print(r.html.html)
        productname = r.html.find('#productTitle', first=True).full_text.strip()
        description = r.html.find('#feature-bullets', first=True).full_text.strip().replace('\n\n\n\n','\n')
@@ -41,6 +42,7 @@ def getdata(asin):
            #'reviews': topreviews,
            'image': image,
            'price': price,
+           'url': url,
        }
        #print(product)
        return product
@@ -49,7 +51,7 @@ def getdata(asin):
 
 
 def main():
-    search = 'mobiles below 10000'
+    search = 'tech'
     asins = get_asins(search)
     #print(f'Found {len(asins)} asins')
     #print(asins)
