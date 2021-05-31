@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
+import random, string
 
 # Create your models here.
 
@@ -68,28 +69,29 @@ class Post(models.Model):
     def __str__(self):
         return self.title + ' | ' + str(self.author)
 
+def random_string_generator(size=10, chars=string.ascii_lowercase+string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
+
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)
     if new_slug is not None:
         slug = new_slug
-    qs = Post.objects.filter(slug=slug,).order_by("-id")
-    exists  = qs.exists()
-    if exists:
-        slug = "%s-%s" %(slug, qs.first().id)
-        return create_slug(instance, new_slug=new_slug)
+    klass = instance.__class__
+
+    while True:
+        if not klass.objects.filter(slug=slug).exists():
+            return slug
+
+        slug = "{slug}-{randstr}".format(
+            slug=slug,
+            randstr=random_string_generator(size=4)
+            )
     return slug
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
-    #---------------
-    slug = slugify(instance.title)
-    qs = Post.objects.filter(slug=slug,).order_by("-id")
-    exists  = qs.exists()
-    print(qs.first(), '-------------------------------')
-    if exists:
-        slug = "%s-%s" %(slug, qs.first().id)
-    #---------------
-    print(slug)
-    instance.slug = slug
+    if not instance.slug:
+       instance.slug = create_slug(instance)
 
 pre_save.connect(pre_save_post_receiver, sender=Post)
 

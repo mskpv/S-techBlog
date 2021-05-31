@@ -21,10 +21,9 @@
 <script>
     function fn1(){
         var pars_cat = document.getElementById('tags').value;
-        var domain = "{{ host }}";
         if ( pars_cat === '' || pars_cat === null){
             pars_cat = 'nothing'
         }
-        document.getElementById('search_cat').action = "http://"+domain+"/category/"+pars_cat;
+        document.getElementById('search_cat').action = "{% url 'category' 'pars_cat' %}".replace(/pars_cat/,pars_cat );
     }
 </script>
