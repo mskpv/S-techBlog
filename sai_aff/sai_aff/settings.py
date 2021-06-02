@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'mskpv',
     'membersignup',
     'ckeditor',
+    'hitcount',
 ]
 
 CKEDITOR_CONFIGS = {

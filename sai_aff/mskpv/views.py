@@ -5,6 +5,7 @@ from .form import Postform ,Editform, Commentform, Replyform, sub_email
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from hitcount.views import HitCountDetailView
 import pandas as pd
 import os
 
@@ -26,11 +27,12 @@ class post(ListView):
         context['cat_menu'] = cat_menu
         return context
 
-class article(DetailView):
+class article(HitCountDetailView):
     model = Post
     template_name = 'article.html' 
     form = Commentform
     formr = Replyform
+    count_hit = True
 
     def post(self,request,*args, **kwargs):
         form = Commentform(request.POST)

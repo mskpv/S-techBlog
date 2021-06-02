@@ -1,6 +1,6 @@
 {% extends 'Stechblog/base.html' %}
 {% load static %}
-
+{% load hitcount_tags %}
 {% block title %} 
 {{ cats }}
 {% endblock %}
@@ -37,7 +37,7 @@
                     <small class="firstsmall"><a class="bg-orange" href="{% url 'category' post.category %}">{{ post.category }}</a></small>
                     <small><a href="tech-single.html" title="">{{ post.created_date }}</a></small>
                     <small><a href="tech-author.html" title="">by {{ post.author }}</a></small>
-                    <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 1114</a></small>
+                    <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> {% get_hit_count for post %}</a></small>
                     {% if user.is_authenticated %}
                        {% if post.author.id == user.id %}
                        <small><a class="bg-orange" href="{% url 'Update_post' post.pk %}">Edit </a></small>

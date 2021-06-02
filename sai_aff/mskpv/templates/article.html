@@ -1,5 +1,6 @@
 {% extends 'Stechblog/base.html' %}
 {% load static %}
+{% load hitcount_tags %}
 {% block title %} 
 {{ post.title}}
 {% endblock %}
@@ -26,7 +27,7 @@
                                     {% else %}
                                     <small><a href="#" title="">{{ post.author }}</a></small>
                                     {% endif %}
-                                    <small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
+                                    <small><a href="#" title=""><i class="fa fa-eye"></i> {% get_hit_count for post %}</a></small>
                                 </div><!-- end meta -->
 
                                 <div class="post-sharing">
