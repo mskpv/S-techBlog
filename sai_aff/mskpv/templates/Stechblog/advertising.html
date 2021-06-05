@@ -68,7 +68,7 @@
             <div class="blog-list-widget">
                 <div class="list-group">
                     {% for post in post_ads_post %} 
-                    <a href="{% url 'article-details' post.pk %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <a href="{% url 'article-details' post.slug %}" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="w-100 justify-content-between">
                             {% if post.header_image %}
                             <img src="{{ post.header_image.url }}" alt="" class="img-fluid float-left">

@@ -64,7 +64,7 @@ class Post(models.Model):
         return self.likes.count()
 
     def get_absolute_url(self):
-        return reverse("article-details",kwargs={'pk':self.pk})
+        return reverse("article-details",kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.title + ' | ' + str(self.author)
