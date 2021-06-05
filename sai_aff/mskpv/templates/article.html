@@ -1,5 +1,6 @@
 {% extends 'Stechblog/base.html' %}
 {% load static %}
+{% load social_share %}
 {% load hitcount_tags %}
 {% block title %} 
 {{ post.title}}
@@ -32,8 +33,8 @@
 
                                 <div class="post-sharing">
                                     <ul class="list-inline">
-                                        <li><a href="http://www.facebook.com/share.php?u=http://127.0.0.1:8000{% url 'article-details' post.id %}}&amp;t=cool" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
-                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
+                                        <li>{% post_to_facebook object_or_url %}</li>
+                                        <li>{% post_to_twitter object_or_url "Tweet on Twitter" %}</li>
                                         <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
                                     </ul>
                                 </div><!-- end post-sharing -->

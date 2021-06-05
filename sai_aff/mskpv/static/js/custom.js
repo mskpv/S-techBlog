@@ -125,3 +125,12 @@ document.addEventListener('scroll', () => {
     capture: true,
     passive: true
 });
+
+// remove the div for toast
+
+document.getElementById('j-toast-wrap').onclick = function () {
+    var i, elements = document.getElementsByClassName('jq-toast-wrap');
+    for (i = elements.length; i--;) {
+      elements[i].parentNode.removeChild(elements[i]);
+    }
+};

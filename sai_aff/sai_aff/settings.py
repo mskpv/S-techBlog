@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'membersignup',
     'ckeditor',
     'hitcount',
+    'django_social_share'
 ]
 
 CKEDITOR_CONFIGS = {
