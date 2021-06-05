@@ -23,7 +23,7 @@
 
                                 <div class="blog-meta big-meta">
                                     <small><a href="#" title="">{{ post.created_date|date:"D M Y"  }}</a></small>
-                                    {% if user.profile.id %}
+                                    {% if post.author.profile.id %}
                                     <small><a href="{% url 'show_profile' post.author.profile.id  %}" title="">{{ post.author }}</a></small>
                                     {% else %}
                                     <small><a href="#" title="">{{ post.author }}</a></small>
@@ -96,7 +96,7 @@
                                     </div><!-- end col -->
 
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                        {% if user.profile.id %}
+                                        {% if post.author.profile.id %}
                                         <h4><a href="{% url 'show_profile' post.author.profile.id  %}">{{ post.author.first_name }} {{ post.author.last_name }}</a></h4>
                                         <p>{{ post.author.profile.bio }}</p>
                                         {% else %}
@@ -106,9 +106,10 @@
                                            {% else %}
                                                <h4>Waiting for the user to update his Profile<h4>
                                            {% endif %}
-                                        <div class="topsocial">
+                                        
                                         {% endif %}
-
+                                        <div class="topsocial">
+                                    
                                             {% if post.author.profile.facebook_url %}<a href="{{ post.author.profile.facebook_url }}" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>{% endif %}
                                             {% if post.author.profile.youtube_url %}<a href="{{ post.author.profile.youtube_url }}" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a>{% endif %}
                                             {% if post.author.profile.youtube_url %}<a href="{{ post.author.profile.youtube_url }}" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>{% endif %}

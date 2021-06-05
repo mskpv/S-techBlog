@@ -38,7 +38,7 @@ S-Tech Blog
                     <P>{{ post.snippet }}...</P>
                     <small class="firstsmall"><a class="bg-orange" href="{% url 'category' post.category %}">{{ post.category }}</a></small>
                     <small><a href="tech-single.html" title="">{{ post.created_date|date:"D M Y"  }}</a></small>
-                    {% if user.profile.id %}
+                    {% if post.author.profile.id %}
                     <small><a href="{% url 'show_profile' post.author.profile.id  %}" title="">by {{ post.author }}</a></small>
                     {% else %}
                     <small><a href="#" title="">by {{ post.author }}</a></small>
