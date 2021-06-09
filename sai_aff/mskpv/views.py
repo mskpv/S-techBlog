@@ -21,11 +21,7 @@ class post(ListView):
     cats = category.objects.all()
     ordering = ['-created_date']
     #ordering = ['-id']
-    def get_context_data(self,*args, **kwargs):
-        cat_menu = category.objects.all()
-        context = super(post,self).get_context_data(*args, **kwargs)
-        context['cat_menu'] = cat_menu
-        return context
+
 
 class article(HitCountDetailView):
     model = Post
