@@ -4,8 +4,8 @@ from django.db.models import fields
 from django.forms import widgets
 from .models import Post, category, Comment, Reply, Emailsubscription
 
-#choices = [('Technology','Technology'),('Entetainment','Entetainment'),('sports','sports'),('Healths','Healths')]
-choices = category.objects.all().values_list('name','name')
+choices = [('Technology','Technology'),('Entetainment','Entetainment'),('sports','sports'),('Healths','Healths')]
+#choices = category.objects.all().values_list('name','name')
 
 category_list = []
 
