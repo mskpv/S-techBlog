@@ -21,8 +21,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('', include('mskpv.urls')),
-    #path('members/', include('membersignup.urls')),
+    path('', include('mskpv.urls')),
+    path('members/', include('membersignup.urls')),
     path('members/', include('django.contrib.auth.urls')),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
