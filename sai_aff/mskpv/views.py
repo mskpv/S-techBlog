@@ -5,6 +5,9 @@ from .form import Postform ,Editform, Commentform, Replyform, sub_email
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from hitcount.views import HitCountDetailView
+import pandas as pd
+import os
 
 # Create your views here.
 def index(request):
@@ -24,11 +27,12 @@ class post(ListView):
         context['cat_menu'] = cat_menu
         return context
 
-class article(DetailView):
+class article(HitCountDetailView):
     model = Post
     template_name = 'article.html' 
     form = Commentform
     formr = Replyform
+    count_hit = True
 
     def post(self,request,*args, **kwargs):
         form = Commentform(request.POST)
@@ -38,20 +42,20 @@ class article(DetailView):
             form.instance.user = request.user
             form.instance.post = post
             form.save()
-            return HttpResponseRedirect(reverse('article-details',args=[str(post.pk)]))
+            return HttpResponseRedirect(reverse('article-details',args=[str(post.slug)]))
         if formr.is_valid():
             post = self.get_object()
             formr.instance.comment_id = request.POST['comment']
             formr.instance.post = post
             formr.save()
             print(request.POST)
-            return HttpResponseRedirect(reverse('article-details',args=[str(post.pk)]))
+            return HttpResponseRedirect(reverse('article-details',args=[str(post.slug)]))
 
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
 
-        likes_connected = get_object_or_404(Post, id=self.kwargs['pk'])
+        likes_connected = get_object_or_404(Post, slug=self.kwargs['slug'])
         liked = False
         if likes_connected.likes.filter(id=self.request.user.id).exists():
             liked = True
@@ -99,16 +103,40 @@ def Category_view(request,cats):
         category_posts = paginator.page(paginator.num_pages)
     return render(request, 'category.html',{'cats':cats.title().replace('-',' '),'category_posts':category_posts , 'cat_menu': cats_list})
 
-def Likeview(request,pk):
+def Likeview(request,slug):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
     if post.likes.filter(id=request.user.id).exists():
         post.likes.remove(request.user)
     else:
         post.likes.add(request.user)
-    return HttpResponseRedirect(reverse('article-details',args=[str(pk)]))
+    return HttpResponseRedirect(reverse('article-details',args=[str(slug)]))
 
 def index_2(request):
     return render(request,'stechblog/index-2.html')
+
+def amazon_post(request):
+    module_dir = os.path.dirname(__file__)  
+    file_path = os.path.join(module_dir, 'gaming laptop.csv')
+    data = pd.read_csv(file_path)
+    data = data.values
+    title = 'Top Gaming Laptop to Buy in 2021'
+    return render(request,'amazon_ads.html',{'data':data, 'title': title})
+
+def amazon_mobiles(request):
+    module_dir = os.path.dirname(__file__)  
+    file_path = os.path.join(module_dir, 'mobiles below 10000.csv')
+    data = pd.read_csv(file_path)
+    data = data.values
+    title = 'Mobile phones under 10,000'
+    return render(request,'amazon_ads1.html',{'data':data, 'title': title})
+
+def amazon_gift(request):
+    module_dir = os.path.dirname(__file__)  
+    file_path = os.path.join(module_dir, 'tech gifts.csv')
+    data = pd.read_csv(file_path)
+    data = data.values
+    title = 'Useful tech gifts to buy on Amazon at any budget'
+    return render(request,'amazon_ads1.html',{'data':data, 'title': title})
 
 def contact_us(request):
     if request.method == "POST":

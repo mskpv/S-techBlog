@@ -51,7 +51,7 @@ def getdata(asin):
 
 
 def main():
-    search = 'mobiles below 10000'
+    search = 'tech'
     asins = get_asins(search)
     #print(f'Found {len(asins)} asins')
     #print(asins)

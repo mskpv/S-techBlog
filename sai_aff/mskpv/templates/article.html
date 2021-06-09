@@ -1,5 +1,7 @@
 {% extends 'Stechblog/base.html' %}
 {% load static %}
+{% load social_share %}
+{% load hitcount_tags %}
 {% block title %} 
 {{ post.title}}
 {% endblock %}
@@ -10,25 +12,29 @@
                         <div class="page-wrapper">
                             <div class="blog-title-area text-center">
                                 <ol class="breadcrumb hidden-xs-down">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'post' %}">Home</a></li>
                                     <li class="breadcrumb-item"><a href="#">Blog</a></li>
                                     <li class="breadcrumb-item active">{{ post.title}}</li>
                                 </ol>
                                 
                                 <span class="color-orange"><a href="{% url 'category' post.category %}">{{ post.category }}</a></span>
-                                {% if user.is_authenticated %}{% if post.author.id == user.id %}  <span class="color-orange" ><small><a href="{% url 'Update_post' post.pk %}">Edit the Post</a> - <a href="{% url 'Delete_post' post.pk %}">Delete the Post</a></small></span>{% endif %}{% endif %}
+                                {% if user.is_authenticated %}{% if post.author.id == user.id %}  <span class="color-orange" ><small><a href="{% url 'Update_post' post.slug %}">Edit the Post</a> - <a href="{% url 'Delete_post' post.slug %}">Delete the Post</a></small></span>{% endif %}{% endif %}
                                 <h3>{{ post.title}}</h3> 
 
                                 <div class="blog-meta big-meta">
                                     <small><a href="#" title="">{{ post.created_date|date:"D M Y"  }}</a></small>
+                                    {% if post.author.profile.id %}
                                     <small><a href="{% url 'show_profile' post.author.profile.id  %}" title="">{{ post.author }}</a></small>
-                                    <small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
+                                    {% else %}
+                                    <small><a href="#" title="">{{ post.author }}</a></small>
+                                    {% endif %}
+                                    <small><a href="#" title=""><i class="fa fa-eye"></i> {% get_hit_count for post %}</a></small>
                                 </div><!-- end meta -->
 
                                 <div class="post-sharing">
                                     <ul class="list-inline">
-                                        <li><a href="http://www.facebook.com/share.php?u=http://127.0.0.1:8000{% url 'article-details' post.id %}}&amp;t=cool" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
-                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
+                                        <li>{% post_to_facebook object_or_url %}</li>
+                                        <li>{% post_to_twitter object_or_url "Tweet on Twitter" %}</li>
                                         <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
                                     </ul>
                                 </div><!-- end post-sharing -->
@@ -50,7 +56,7 @@
 
                             <hr class="invis1">
 
-                            <form action="{% url 'like_post' post.pk %}" method="POST">
+                            <form action="{% url 'like_post' post.slug %}" method="POST">
                                 {% csrf_token %}
                                 {% if user.is_authenticated %}
                                 {% if post_is_liked %}
@@ -90,11 +96,20 @@
                                     </div><!-- end col -->
 
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                        {% if post.author.profile.id %}
                                         <h4><a href="{% url 'show_profile' post.author.profile.id  %}">{{ post.author.first_name }} {{ post.author.last_name }}</a></h4>
                                         <p>{{ post.author.profile.bio }}</p>
-
+                                        {% else %}
+                                        <h4>{{ post.author }}</h4>
+                                           {% if user.is_authenticated and post.author == user %}
+                                               <h5> <a href="{% url 'create_profile_page' %}">Create Profile</a></h5>
+                                           {% else %}
+                                               <h4>Waiting for the user to update his Profile<h4>
+                                           {% endif %}
+                                        
+                                        {% endif %}
                                         <div class="topsocial">
-                                            
+                                    
                                             {% if post.author.profile.facebook_url %}<a href="{{ post.author.profile.facebook_url }}" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>{% endif %}
                                             {% if post.author.profile.youtube_url %}<a href="{{ post.author.profile.youtube_url }}" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a>{% endif %}
                                             {% if post.author.profile.youtube_url %}<a href="{{ post.author.profile.youtube_url }}" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>{% endif %}
@@ -133,7 +148,7 @@
                                                     <p><i class="fas fa-reply"></i>==> {{ reply.reply_body }}</p>
                                                     {% endfor %}
                                                     {% endif %}
-                                                    <form action="{% url 'article-details' post.pk %}" method="POST">
+                                                    <form action="{% url 'article-details' post.slug %}" method="POST">
                                                         {% csrf_token %}
                                                         <input type="hidden" name="comment" class="form-control" value="{{ comment.id }}">
                                                         {{ formr.as_p}}
@@ -158,7 +173,7 @@
                                 <h4 class="small-title">Add Comment</h4>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                       <form action="{% url 'article-details' post.pk %}" method="POST">
+                                       <form action="{% url 'article-details' post.slug %}" method="POST">
                                            {% csrf_token %}
                                            {{ form.as_p}}
                                     

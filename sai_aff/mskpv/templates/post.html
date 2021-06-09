@@ -1,6 +1,6 @@
 {% extends 'Stechblog/base.html' %}
 {% load static %}
-
+{% load hitcount_tags %}
 {% block title %} 
 S-Tech Blog 
 {% endblock %}
@@ -22,9 +22,9 @@ S-Tech Blog
             <div class="blog-box row">
                 <div class="col-md-4">
                     <div class="post-media">
-                        <a href="{% url 'article-details' post.pk %}" title="">
+                        <a href="{% url 'article-details' post.slug %}" title="">
                             {% if post.header_image %}
-                            <img src="{{ post.header_image.url }}" alt=""  class="img-fluid" style="width:300px;height:250px;" >
+                            <img src="{{ post.header_image.url }}" alt=""  class="img-fluid" style="height:250px;" >
                             {% else %}
                             <img src="{% static 'upload/web_server.jpg' %}" alt="" class="img-fluid">
                             {% endif %}
@@ -34,16 +34,20 @@ S-Tech Blog
                 </div><!-- end col -->
 
                 <div class="blog-meta big-meta col-md-8">
-                    <h4><a href="{% url 'article-details' post.pk %}" title="">{{ post.title }}</a> </h4> 
+                    <h4><a href="{% url 'article-details' post.slug %}" title="">{{ post.title }}</a> </h4> 
                     <P>{{ post.snippet }}...</P>
                     <small class="firstsmall"><a class="bg-orange" href="{% url 'category' post.category %}">{{ post.category }}</a></small>
                     <small><a href="tech-single.html" title="">{{ post.created_date|date:"D M Y"  }}</a></small>
+                    {% if post.author.profile.id %}
                     <small><a href="{% url 'show_profile' post.author.profile.id  %}" title="">by {{ post.author }}</a></small>
-                    <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 1114</a></small>
+                    {% else %}
+                    <small><a href="#" title="">by {{ post.author }}</a></small>
+                    {% endif %}
+                    <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> {% get_hit_count for post %}</a></small>
                     {% if user.is_authenticated %}
                        {% if post.author.id == user.id %}
-                       <small><a class="bg-orange" href="{% url 'Update_post' post.pk %}">Edit </a></small>
-                       <small><a class="bg-orange" href="{% url 'Delete_post' post.pk %}">Delete </a></small> 
+                       <small><a class="bg-orange" href="{% url 'Update_post' post.slug %}">Edit </a></small>
+                       <small><a class="bg-orange" href="{% url 'Delete_post' post.slug %}">Delete </a></small> 
                     {% endif %}
                     {% endif %}
                     

@@ -5,7 +5,8 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm, Password
 from django.urls import reverse_lazy
 from .form import SignUpForm, EditProfileForm, Passwordchangingform, LoginAuthForm, Profile_page_form
 from django.contrib.auth.views import PasswordChangeView
-from mskpv.models import Profile
+from mskpv.models import Profile, Post
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 class CreateProfilepageView(CreateView):
@@ -32,9 +33,22 @@ class ShowProfilePageView(DetailView):
     
     def get_context_data(self,*args, **kwargs):
         users = Profile.objects.all()
-        context = super(ShowProfilePageView,self).get_context_data(*args,**kwargs)
         page_user = get_object_or_404(Profile,id=self.kwargs['pk'])
+        posts = []
+        for i in Post.objects.all():
+            if i.author.profile.id == self.kwargs['pk']:
+                posts.append(i)
+        page = self.request.GET.get('page', 1)
+        paginator = Paginator(posts, 4)
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+        context = super(ShowProfilePageView,self).get_context_data(*args,**kwargs)
         context['page_user'] = page_user
+        context['posts'] = posts
         return context
 
 class UserRegisterview(generic.CreateView):
