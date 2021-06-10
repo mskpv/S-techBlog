@@ -145,7 +145,7 @@ def contact_us(request):
         subject = request.POST['subject']
         body = request.POST['body']
         Sendmail(name=name, subject=subject, email=email, body=body).save()
-    return render(request,'stechblog/Contact-us.html')
+    return render(request,'Stechblog/Contact-us.html')
 
 def subscription(request):
 
