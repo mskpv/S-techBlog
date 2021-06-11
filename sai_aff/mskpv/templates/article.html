@@ -5,6 +5,9 @@
 {% block title %} 
 {{ post.title}}
 {% endblock %}
+{% block keywords %}{{ post.title }}{% endblock %} 
+{% block description %}{{ post.snippet }}{% endblock %} 
+{% block author %}{{ post.author }}{% endblock %} 
 {% block body %}
 
 
@@ -42,9 +45,9 @@
 
                             <div class="single-post-media">
                                 {% if post.header_image %}
-                                <img src="{{ post.header_image.url }}" alt=""  class="img-fluid" style="width:800px;height:400px;" >
+                                <img src="{{ post.header_image.url }}" alt="{{post.title}}"  class="img-fluid" style="width:800px;height:400px;" >
                                 {% else %}
-                                <img src="{% static 'upload/web_server.jpg' %}" alt="" class="img-fluid" style="width:800px;height:400px;" >
+                                <img src="{% static 'upload/web_server.jpg' %}" alt="{{post.title}}" class="img-fluid" style="width:800px;height:400px;" >
                                 {% endif %}
                             </div><!-- end media -->
 
@@ -76,7 +79,7 @@
                                 <div class="col-lg-12">
                                     <div class="banner-spot clearfix">
                                         <div class="banner-img">
-                                            <img src="{% static 'images/banner1.gif' %}" alt="" class="img-fluid">
+                                            <img src="{% static 'images/banner1.gif' %}" alt="advertising" class="img-fluid">
                                         </div><!-- end banner-img -->
                                     </div><!-- end banner -->
                                 </div><!-- end col -->
@@ -89,9 +92,9 @@
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                         {% if post.author.profile.profile_pic %}
-                                     <img src="{{ post.author.profile.profile_pic.url }}" alt="" width="100" height="100" class="img-fluid rounded-circle" >
+                                     <img src="{{ post.author.profile.profile_pic.url }}" alt="image of {{post.author}}" class="img-fluid rounded-circle" >
                                         {% else %}
-                                    <img src="{% static 'images/Blog_Person.png' %}" alt=""  width="100" height="100" class="img-fluid rounded-circle" >
+                                    <img src="{% static 'images/Blog_Person.png' %}" alt="image of {{post.author}}" class="img-fluid rounded-circle" >
                                         {% endif %}
                                     </div><!-- end col -->
 
@@ -136,7 +139,7 @@
                                             {% for comment in post.comments.all %}
                                             <div class="media">
                                                 <a class="media-left" href="#">
-                                                    <img src="{% static 'images/Blog_Person.png' %}" alt="" class="rounded-circle">
+                                                    <img src="{% static 'images/Blog_Person.png' %}" alt="image of {{ comment.name }}" class="rounded-circle">
                                                 </a>
                                                 <div class="media-body">
                                                     <h4 class="media-heading user_name">{{ comment.name }} <small>{{ comment.date_added }}</small></h4>

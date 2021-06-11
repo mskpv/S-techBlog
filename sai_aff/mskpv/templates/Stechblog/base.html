@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-    {% include 'Stechblog/head.html' %}
+    <head>
+            
+    <!-- Site Metas -->
+    
+    <meta name="keywords" content="{% block keywords %} {% endblock %}">
+    <meta name="description" content="{% block description %} {% endblock %}">
+    <meta name="author" content="{% block author %} {% endblock %}">
+
+       {% include 'Stechblog/head.html' %}
+    </head>
     <title>{% block title %}     {% endblock %}</title>
     <br>
     {% block aff %}
