@@ -6,26 +6,26 @@
             <div class="banner-spot clearfix">
                 <div class="banner-img">
                     <a href="#" title="">
-                       <img src="{% static 'images/Udemy.gif' %}" alt="" class="img-fluid">
+                       <img src="{% static 'images/Udemy.gif' %}" alt="Advertising" class="img-fluid">
                     </a>
                 </div><!-- end banner-img -->
             </div><!-- end banner -->
         </div><!-- end widget -->
 
         <div class="widget">
-            <h2 class="widget-title">Trend Videos</h2>
+            <h1 class="widget-title">Best Deals from Amazon</h1>
             <div class="trend-videos">
                 <div class="blog-box">
                     <div class="post-media">
                         <a href="{% url 'amazon_post' %}" title="">
-                            <img src="{% static 'images/ad_computer.jpg' %}" alt="" class="img-fluid">
+                            <img src="{% static 'images/ad_computer.jpg' %}" alt="Advertising" class="img-fluid">
                             <div class="hovereffect">
-                                <span class="videohover"></span>
+                                <span class="#"></span>
                             </div><!-- end hover -->
                         </a>
                     </div><!-- end media -->
                     <div class="blog-meta">
-                        <h4><a href="{% url 'amazon_post' %}" title="">We prepared the best 10 laptop presentations for you</a></h4>
+                        <h4><a href="{% url 'amazon_post' %}" title="">We prepared the best laptop presentations for you</a></h4>
                     </div><!-- end meta -->
                 </div><!-- end blog-box -->
 
@@ -34,9 +34,9 @@
                 <div class="blog-box">
                     <div class="post-media">
                         <a href="{% url 'amazon_mobiles' %}" title="">
-                            <img src="{% static 'images/ad_phone.jpg' %}" alt="" class="img-fluid">
+                            <img src="{% static 'images/ad_phone.jpg' %}" alt="Advertising" class="img-fluid">
                             <div class="hovereffect">
-                                <span class="videohover"></span>
+                                <span class="#"></span>
                             </div><!-- end hover -->
                         </a>
                     </div><!-- end media -->
@@ -50,9 +50,9 @@
                 <div class="blog-box">
                     <div class="post-media">
                         <a href="{% url 'amazon_gift' %}" title="">
-                            <img src="{% static 'images/ad_gift.jpg' %}" alt="" class="img-fluid">
+                            <img src="{% static 'images/ad_gift.jpg' %}" alt="Advertising" class="img-fluid">
                             <div class="hovereffect">
-                                <span class="videohover"></span>
+                                <span class="#"></span>
                             </div><!-- end hover -->
                         </a>
                     </div><!-- end media -->
@@ -64,16 +64,16 @@
         </div><!-- end widget -->
 
         <div class="widget">
-            <h2 class="widget-title">Recent Posts</h2>
+            <h1 class="widget-title">Recent Posts</h1>
             <div class="blog-list-widget">
                 <div class="list-group">
                     {% for post in post_ads_post %} 
                     <a href="{% url 'article-details' post.slug %}" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="w-100 justify-content-between">
                             {% if post.header_image %}
-                            <img src="{{ post.header_image.url }}" alt="" class="img-fluid float-left">
+                            <img src="{{ post.header_image.url }}" alt="{{post.title}}" class="img-fluid float-left">
                             {% else %}
-                            <img src="{% static 'upload/web_server.jpg' %}" alt="" class="img-fluid float-left">
+                            <img src="{% static 'upload/web_server.jpg' %}" alt="{{post.title}}" class="img-fluid float-left">
                             {% endif %}
                             <h5 class="mb-1">{{ post.title }}</h5>
                             <small>{{ post.created_date }}</small>
@@ -89,7 +89,7 @@
             <div class="banner-spot clearfix">
                 <div class="banner-img">
                     <a href="#" title="">
-                        <img src="{% static 'images/gym-1.gif'%}" alt="" class="img-fluid">
+                        <img src="{% static 'images/gym-1.gif'%}" alt="Advertising" class="img-fluid">
                     </a>    
                 </div><!-- end banner-img -->
             </div><!-- end banner -->
@@ -99,7 +99,7 @@
             <div class="banner-spot clearfix">
                 <div class="banner-img">
                     <a href="#" title="">
-                        <img src="{% static 'images/Flipkart-Big-Billion-Days-Sale-Banner.jpg'%}" alt="" class="img-fluid">
+                        <img src="{% static 'images/Flipkart-Big-Billion-Days-Sale-Banner.jpg'%}" alt="Advertising" class="img-fluid">
                     </a>
                 </div><!-- end banner-img -->
             </div><!-- end banner -->
@@ -108,7 +108,7 @@
             <div class="banner-spot clearfix">
                 <div class="banner-img">
                     <a href="#" title="">
-                        <img src="{% static 'images/ads_amazon.gif' %}" alt="" class="img-fluid">
+                        <img src="{% static 'images/ads_amazon.gif' %}" alt="Advertising" class="img-fluid">
                     </a>
                 </div><!-- end banner-img -->
             </div><!-- end banner -->

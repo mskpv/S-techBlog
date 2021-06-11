@@ -34,20 +34,20 @@ Amazon
                             </div><!-- end title -->
                             {% for data in data %}
                             <div class="single-post-media">
-                                <h4><a href="tech-single.html" title="">{{ data.0  }}</a></h4>
-                                <img src="{{ data.4 }}" alt=""  class="img-fluid" style="width:500px;height:400px;" >
+                                <h4><a href="{{ data.6 }}" title="">{{ data.0  }}</a></h4>
+                                <img src="{{ data.4 }}" alt="{{ data.0  }}"  class="img-fluid" style="width:500px;height:400px;" >
                                 
                             </div><!-- end media -->
                             <div>
-                                <h3><a href="tech-category.html" title="">Rating : {{ data.3.split|first }}</a></h3>
+                                <h3><a href="{{ data.6 }}" title="">Rating : {{ data.3.split|first }}</a></h3>
                                 <span class="rating">
                                 
                                     {% for i in 'range(5)'  %}
                                         <i class="fa fa-star"></i>
                                     {% endfor %}
                                 </span>
-                                <h4><a href="tech-single.html" title="">Total Reviews: {{ data.2  }}</a></h4>
-                                <h1><a href="tech-single.html" title="">Price : {{ data.5  }}</a></h1>
+                                <h4><a href="{{ data.6 }}" title="">Total Reviews: {{ data.2  }}</a></h4>
+                                <h1><a href="{{ data.6 }}" title="">Price : {{ data.5  }}</a></h1>
                             </div>
                             <div class="blog-content">  
                                 <div class="pp">
@@ -65,7 +65,7 @@ Amazon
                                 <div class="col-lg-12">
                                     <div class="banner-spot clearfix">
                                         <div class="banner-img">
-                                            <img src="#" alt="" class="img-fluid">
+                                            <img src="{% static 'images/sample.jpg' %}" alt="advertising" class="img-fluid">
                                         </div><!-- end banner-img -->
                                     </div><!-- end banner -->
                                 </div><!-- end col -->
