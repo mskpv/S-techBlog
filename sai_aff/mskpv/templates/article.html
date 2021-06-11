@@ -5,6 +5,9 @@
 {% block title %} 
 {{ post.title}}
 {% endblock %}
+{% block keywords %}{{ post.title }}{% endblock %} 
+{% block description %}{{ post.snippet }}{% endblock %} 
+{% block author %}{{ post.author }}{% endblock %} 
 {% block body %}
 
 

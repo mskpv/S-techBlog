@@ -5,10 +5,10 @@
             
     <!-- Site Metas -->
     
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
+    <meta name="keywords" content="{% block keywords %} {% endblock %}">
+    <meta name="description" content="{% block description %} {% endblock %}">
+    <meta name="author" content="{% block author %} {% endblock %}">
+
         {% include 'Stechblog/head.html' %}
     </head>
 
