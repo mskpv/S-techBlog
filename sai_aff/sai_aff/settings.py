@@ -43,8 +43,12 @@ INSTALLED_APPS = [
     'membersignup',
     'ckeditor',
     'hitcount',
-    'django_social_share'
+    'django_social_share',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 ]
+
+SITE_ID = 3
 
 CKEDITOR_CONFIGS = {
     'default': {
