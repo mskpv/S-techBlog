@@ -1,5 +1,6 @@
 User-Agent: *
 
+allow: /
 Disallow: /admin
 
-Sitemap: https://stechmpv.herokuapp.com/sitemap.xml
+Sitemap: https://{{host}}/sitemap.xml

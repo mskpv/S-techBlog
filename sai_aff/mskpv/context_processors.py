@@ -1,6 +1,7 @@
 from .models import Post, category, Comment, Reply, Emailsubscription
 from .form import sub_email
 from django.core.paginator import Paginator, EmptyPage
+from django.contrib.sites.models import Site
 
 def get_search_list(request):
     category_search = category.objects.all()
@@ -16,7 +17,7 @@ def get_search_list(request):
 
     context = {
         'category_search': category_search, 
-        'host': '127.0.0.1:8000', 
+        'host': Site.objects.get_current().domain, 
         'post_ads_post': post_ads_post,
         'sub_form': form,
     }
