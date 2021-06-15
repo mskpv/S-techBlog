@@ -5,14 +5,19 @@ from .models import Post
 class BlogPostSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.8
+    protocol = 'https'
 
     def items(self):
         return Post.objects.all()
 
+    def lastmod(self, obj):
+        return obj.published_date
+
 
 class StaticViewSitemap(Sitemap):
     changefreq = 'monthly'
-
+    protocol = 'https'
+    
     def items(self):
         return ['index','post', 'contact','amazon_post','amazon_mobiles','amazon_gift']
 
