@@ -1,8 +1,14 @@
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import BlogPostSitemap, StaticViewSitemap
 from django.urls import path
 from django.contrib.auth import views
 from . import views
 from .views import post, article, Addpost_view, Updatepost_view, Deletepost_view, Addcategory_view, subscription, userpost_view #, AddComment_view
 
+sitemaps = {
+    'posts': BlogPostSitemap,
+    'static': StaticViewSitemap,
+}
 
 urlpatterns = [
     #path('', views.index, name='index'),
@@ -23,4 +29,5 @@ urlpatterns = [
     path('amazon-post/', views.amazon_post, name='amazon_post' ),
     path('amazon-mobiles/', views.amazon_mobiles, name='amazon_mobiles' ),
     path('amazon-gift/', views.amazon_gift, name='amazon_gift' ),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
 ]

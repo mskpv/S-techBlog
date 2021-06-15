@@ -1,0 +1,6 @@
+User-Agent: *
+
+allow: /
+Disallow: /admin
+
+Sitemap: https://{{host}}/sitemap.xml
