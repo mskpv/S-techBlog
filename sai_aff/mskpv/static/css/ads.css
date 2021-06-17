@@ -10,3 +10,11 @@
     height: 0.1px;
     border: 1px solid gray;
   }
+
+  /* dropdown cats **************************************/
+
+  .scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
