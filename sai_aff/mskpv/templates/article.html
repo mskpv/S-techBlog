@@ -45,7 +45,9 @@
 
                             <div class="single-post-media">
                                 {% if post.header_image %}
-                                <img src="{{ post.header_image.url }}" alt="{{post.title}}"  class="img-fluid" style="width:800px;height:400px;" >
+                                <img src="{{ post.header_image }}" alt="image of {{post.title}}"  class="img-fluid" style="width:800px;height:400px;" >
+                                {% elif post.image %}
+                                <img src="{{ post.image.url }}" alt="image of {{post.title}}"  class="img-fluid" style="width:800px;height:400px;" >
                                 {% else %}
                                 <img src="{% static 'upload/web_server.jpg' %}" alt="{{post.title}}" class="img-fluid" style="width:800px;height:400px;" >
                                 {% endif %}
