@@ -59,7 +59,9 @@ Blog Post
                                                         <div class="post-media">
                                                             <a href="{% url 'article-details' post.slug %}" title="">
                                                                 {% if post.header_image %}
-                                                                <img src="{{ post.header_image.url }}" alt="{{ post.title }}"  class="img-fluid" style="height:250px;" >
+                                                                <img src="{{ post.header_image }}" alt="image of {{post.title}}"  class="img-fluid" style="height:250px;" >
+                                                                {% elif post.image %}
+                                                                <img src="{{ post.image.url }}" alt="image of {{post.title}}"  class="img-fluid" style="height:250px;" >
                                                                 {% else %}
                                                                 <img src="{% static 'upload/web_server.jpg' %}" alt="{{ post.title }}" class="img-fluid">
                                                                 {% endif %}
