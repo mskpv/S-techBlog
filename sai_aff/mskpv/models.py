@@ -6,6 +6,7 @@ from django.urls import reverse
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 import random, string
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -38,9 +39,17 @@ STATUS = (
     (1,"Publish")
 )
 
+def validate_image(image):
+
+    file_size = image.file.size
+    limit_kb = 200
+    if file_size > limit_kb * 1024:
+        raise ValidationError("Max size of file is {} KB".format(limit_kb))  
+
 class Post(models.Model):
     title = models.CharField(max_length=225)
-    header_image = models.ImageField(null=True, blank=True, upload_to='images/')
+    image = models.ImageField(null=True, blank=True, upload_to='temp/',validators=[validate_image])
+    header_image = models.TextField(null=True, blank=True)
     title_tag = models.CharField(max_length=225, default= 'S-Tech blog')
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     category = models.CharField(max_length=225, default='---')
@@ -68,6 +77,18 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title + ' | ' + str(self.author)
+
+def base64String(sender, instance, *args, **kwargs):
+    import base64
+    try:
+        header_image = "data:image/jpeg;base64,"+base64.b64encode(instance.image.read()).decode('utf-8')
+    except ValueError:
+        header_image = ''
+    except OSError:
+        return  
+    instance.header_image = header_image
+
+pre_save.connect(base64String, sender=Post)
 
 def random_string_generator(size=10, chars=string.ascii_lowercase+string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
