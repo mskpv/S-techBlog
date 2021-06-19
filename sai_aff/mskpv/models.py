@@ -10,10 +10,21 @@ from django.core.exceptions import ValidationError
 
 # Create your models here.
 
+
+def validate_image(image):
+    try:
+        file_size = image.file.size
+        limit_kb = 100
+        if file_size > limit_kb * 1024:
+            raise ValidationError("Max size of file is {} KB".format(limit_kb))
+    except  OSError:
+        return
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
-    profile_pic = models.ImageField(null=True, blank=True, upload_to='images/profile/')
+    profile_pic = models.ImageField(null=True, blank=True, upload_to='images/profile/',validators=[validate_image])
     youtube_url = models.CharField(max_length=255, null=True, blank=True)
     facebook_url = models.CharField(max_length=255, null=True, blank=True)
     twitter_url = models.CharField(max_length=255, null=True, blank=True)
@@ -39,12 +50,6 @@ STATUS = (
     (1,"Publish")
 )
 
-def validate_image(image):
-
-    file_size = image.file.size
-    limit_kb = 200
-    if file_size > limit_kb * 1024:
-        raise ValidationError("Max size of file is {} KB".format(limit_kb))  
 
 class Post(models.Model):
     title = models.CharField(max_length=225)
