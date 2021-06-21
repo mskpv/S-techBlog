@@ -18,3 +18,10 @@
     max-height: 200px;
     overflow-x: hidden;
 }
+
+.errorlist {
+  color: aliceblue;
+  background: #f44336;
+  font-size: large;
+  font-weight: bold;
+}
