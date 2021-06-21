@@ -21,8 +21,10 @@ Blog Post
                                         <h4 class="small-title">About author</h4>
                                         <div class="row">
                                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                                {% if page_user.profile_pic %}
-                                             <img src="{{ page_user.profile_pic.url }}" alt="image of {{ page_user|title }}" class="img-fluid rounded-circle" >
+                                                {% if page_user.header_image %}
+                                             <img src="{{ page_user.header_image }}" alt="image of {{ page_user|title }}" class="img-fluid rounded-circle" >
+                                                {% elif page_user.image %}
+                                             <img src="{{ page_user.image.url }}" alt="image of {{ page_user|title }}" class="img-fluid rounded-circle" >
                                                 {% else %}
                                             <img src="{% static 'images/Blog_Person.png' %}" alt="image of {{ page_user|title }}" class="img-fluid rounded-circle" >
                                                 {% endif %}

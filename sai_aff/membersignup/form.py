@@ -6,7 +6,7 @@ from mskpv.models import Profile
 class Profile_page_form(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('bio', 'profile_pic', 'youtube_url', 'facebook_url', 'twitter_url', 'instagram_url')
+        fields = ('bio', 'image', 'youtube_url', 'facebook_url', 'twitter_url', 'instagram_url')
 
         widgets = {
             'bio': forms.Textarea(attrs={'class': "form-control"}),

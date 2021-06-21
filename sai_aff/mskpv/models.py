@@ -24,7 +24,8 @@ def validate_image(image):
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
-    profile_pic = models.ImageField(null=True, blank=True, upload_to='images/profile/',validators=[validate_image])
+    image = models.ImageField(null=True, blank=True, upload_to='temp/',validators=[validate_image])
+    header_image = models.TextField(null=True, blank=True)
     youtube_url = models.CharField(max_length=255, null=True, blank=True)
     facebook_url = models.CharField(max_length=255, null=True, blank=True)
     twitter_url = models.CharField(max_length=255, null=True, blank=True)
@@ -94,6 +95,8 @@ def base64String(sender, instance, *args, **kwargs):
     instance.header_image = header_image
 
 pre_save.connect(base64String, sender=Post)
+
+pre_save.connect(base64String, sender=Profile)
 
 def random_string_generator(size=10, chars=string.ascii_lowercase+string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
