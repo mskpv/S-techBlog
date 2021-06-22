@@ -152,14 +152,14 @@
                                                     {% if comment.replies.all %}
                                                     <h5>response:</h5>
                                                     {% for reply in comment.replies.all %}
-                                                    <p><i class="fas fa-reply"></i>==> {{ reply.reply_body }}</p>
+                                                    <p><i class="fa fa-book"></i>=> {{ reply.reply_body }}</p>
                                                     {% endfor %}
                                                     {% endif %}
                                                     <form action="{% url 'article-details' post.slug %}" method="POST">
                                                         {% csrf_token %}
                                                         <input type="hidden" name="comment" class="form-control" value="{{ comment.id }}">
                                                         {{ formr.as_p}}
-                                                        <button type="submit" class="btn btn-primary">Reply <i class="fa fa-ok"></i></button>
+                                                        <button type="submit" class="btn btn-primary"> Reply <i class="fa fa-reply"> </i></button>
                                                     </form>
                                                     <script>
                                                         var name = "{{ comment.id }}";
