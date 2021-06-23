@@ -19,7 +19,7 @@ class post(ListView):
     template_name = 'post.html'
     paginate_by = 9
     cats = category.objects.all()
-    ordering = ['-created_date']
+    ordering = ['-published_date']
     #ordering = ['-id']
     def get_context_data(self,*args, **kwargs):
         cat_menu = category.objects.all()
@@ -92,7 +92,7 @@ class Addcategory_view(CreateView):
 
 def Category_view(request,cats):
     cats_list = category.objects.all()
-    category_posts = Post.objects.filter(category=cats.replace('-',' '))
+    category_posts = Post.objects.all().order_by('-published_date').filter(status=1).filter(category=cats.replace('-',' '))
     page = request.GET.get('page', 1)
     paginator = Paginator(category_posts, 9)
     try:
@@ -157,7 +157,7 @@ def subscription(request):
     return render(request, 'subscription.html')
 
 def userpost_view(request,state):
-    status_posts = Post.objects.filter(status=state).order_by('-created_date')
+    status_posts = Post.objects.filter(status=state)
     page = request.GET.get('page', 1)
     #page = request.GET.get('page')
     paginator = Paginator(status_posts, 10)

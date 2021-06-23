@@ -42,7 +42,7 @@ S-Tech Blog
                     <h4><a href="{% url 'article-details' post.slug %}" title="">{{ post.title }}</a> </h4> 
                     <P>{{ post.snippet }}...</P>
                     <small class="firstsmall"><a class="bg-orange" href="{% url 'category' post.category %}">{{ post.category }}</a></small>
-                    <small><a href="#" title="">{{ post.created_date|date:"d M Y"  }}</a></small>
+                    <small><a href="#" title="">{{ post.published_date|date:"d M Y"  }}</a></small>
                     {% if post.author.profile.id %}
                     <small><a href="{% url 'show_profile' post.author.profile.id  %}" title="">by {{ post.author }}</a></small>
                     {% else %}

@@ -78,7 +78,7 @@
                             <img src="{% static 'upload/web_server.jpg' %}" alt="{{post.title}}" class="img-fluid float-left">
                             {% endif %}
                             <h5 class="mb-1">{{ post.title }}</h5>
-                            <small>{{ post.created_date }}</small>
+                            <small>{{ post.published_date|date:"d M Y" }}</small>
                         </div>
                     </a>
                     {% endfor %}
