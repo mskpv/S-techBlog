@@ -35,7 +35,7 @@ class ShowProfilePageView(DetailView):
         users = Profile.objects.all()
         page_user = get_object_or_404(Profile,id=self.kwargs['pk'])
         posts = []
-        for i in Post.objects.all():
+        for i in Post.objects.all().order_by('-published_date').filter(status=1):
             if i.author.profile.id == self.kwargs['pk']:
                 posts.append(i)
         page = self.request.GET.get('page', 1)

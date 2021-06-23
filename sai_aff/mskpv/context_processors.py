@@ -5,7 +5,7 @@ from django.contrib.sites.models import Site
 
 def get_search_list(request):
     category_search = category.objects.all()
-    post_ads = Post.objects.all().order_by('-created_date')
+    post_ads = Post.objects.all().order_by('-published_date').filter(status=1)
     paginator = Paginator(post_ads, 3)
 
     form = sub_email()
