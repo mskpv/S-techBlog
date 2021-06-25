@@ -25,3 +25,21 @@
   font-size: large;
   font-weight: bold;
 }
+
+/* container-fluid fixed-bottom ***********************/
+
+@media all and (max-width: 767px) {
+  .col-pts {
+    margin:auto !important;
+  }
+  .con-pts {
+    bottom:2px !important;
+  }
+  .card-pts {
+    padding:10px 20px !important;
+  }
+}
+
+.text-right{text-align:right!important}
+
+.card-body{-ms-flex:1 1 auto;flex:1 1 auto;padding:1.25rem}.card-title{margin-bottom:.75rem}

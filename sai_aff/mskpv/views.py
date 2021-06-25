@@ -168,3 +168,9 @@ def userpost_view(request,state):
     except EmptyPage:
         status_posts = paginator.page(paginator.num_pages)
     return render(request, 'user_post.html',{ 'page':page,'category_posts':status_posts})
+
+def Terms_Conditions(request):
+   return render(request,'Stechblog/terms_and_conditions.html')
+
+def Privacy_Policy(request):
+    return render(request,'Stechblog/Privacy_Policy.html')
