@@ -8,25 +8,21 @@ Blog Post
 {% block nav %}Author by: {{ page_user|title }}{% endblock %}{% block trm %} Need to know about the author{% endblock %}
 
 {% block body %}
-<section class="section wb">
+<section class="section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                 <div class="page-wrapper">
-                    <div class="row">
-                        
-                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-                            
-                                    <div class="custombox authorbox clearfix">
-                                        <h4 class="small-title">About author</h4>
-                                        <div class="row">
+                    <div class="custombox authorbox clearfix">
+                       <h4 class="small-title">About author</h4>
+                        <div class="row">
                                             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                                 {% if page_user.header_image %}
                                              <img src="{{ page_user.header_image }}" alt="image of {{ page_user|title }}" class="img-fluid rounded-circle" >
                                                 {% elif page_user.image %}
                                              <img src="{{ page_user.image.url }}" alt="image of {{ page_user|title }}" class="img-fluid rounded-circle" >
                                                 {% else %}
-                                            <img src="{% static 'images/Blog_Person.png' %}" alt="image of {{ page_user|title }}" class="img-fluid rounded-circle" >
+                                             <img src="{% static 'images/Blog_Person.png' %}" alt="image of {{ page_user|title }}" class="img-fluid rounded-circle" >
                                                 {% endif %}
                                             </div><!-- end col -->
         
@@ -46,14 +42,14 @@ Blog Post
         
                                             </div><!-- end col -->
                                         </div><!-- end row -->
-                                    </div><!-- end author-box -->
-                                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                                     </div><!-- end author-box -->
+
                                         <hr class="invis">
                                         <div class="page-wrapper">
                                             <div class="blog-top clearfix">
                                                 <h4 class="pull-left">Post created by {{ page_user|title }}<a href="#"><i class="fa fa-cool"></i></a></h4>
-                                            </div><!-- end blog-top -->
-                                        {% for post in posts %}
+                                            </div><!-- end blog-top -->          
+                                         {% for post in posts %}
                                             {% if post.author.profile.id == page_user.id %}
                                             <div class="blog-list clearfix">
                                                 <div class="blog-box row">
@@ -98,9 +94,9 @@ Blog Post
                                     
                                             </div><!-- end blog-list -->
                                             {% endif %}
-                                        {% endfor %}
+                                         {% endfor %}
                                         
-                                        {% if posts.has_other_pages %}
+                                         {% if posts.has_other_pages %}
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <nav aria-label="Page navigation">
@@ -124,8 +120,8 @@ Blog Post
                                                 </nav>
                                             </div><!-- end col -->
                                         </div><!-- end row -->
-                                        {% endif %}
-    <hr class="invis">
+                                         {% endif %}
+                                            <hr class="invis">
                                         </div><!-- end page-wrapper -->
                                     </div>
                         </div>
