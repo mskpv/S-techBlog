@@ -22,9 +22,9 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('mskpv.urls')),
-    path('members/', include('membersignup.urls')),
     path('members/', include('django.contrib.auth.urls')),
+    path('members/', include('membersignup.urls')),
+    path('', include('mskpv.urls')),
     path("robots.txt",TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

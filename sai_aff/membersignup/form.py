@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm, AuthenticationForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
 from django import forms
 from mskpv.models import Profile
@@ -62,3 +62,18 @@ class LoginAuthForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ('username', 'password')
+
+class passwdemailform(PasswordResetForm):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': "form-control"}))
+
+    class Meta:
+        model = User
+        fields = ('email')
+
+class Passwdresetform(SetPasswordForm):
+    new_password1 = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={'class': "form-control"}))
+    new_password2 = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={'class': "form-control"}))
+
+    class Meta:
+        model = User
+        fields = ('new_password1','new_password2')
