@@ -3,8 +3,8 @@ from django.views import generic
 from django.views.generic import DetailView, CreateView
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm, AuthenticationForm
 from django.urls import reverse_lazy
-from .form import SignUpForm, EditProfileForm, Passwordchangingform, LoginAuthForm, Profile_page_form
-from django.contrib.auth.views import PasswordChangeView
+from .form import SignUpForm, EditProfileForm, Passwordchangingform, LoginAuthForm, Profile_page_form, Passwdresetform, passwdemailform
+from django.contrib.auth.views import PasswordChangeView, PasswordResetConfirmView, PasswordResetView
 from mskpv.models import Profile, Post
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -69,7 +69,13 @@ class PasswordChangeView(PasswordChangeView):
     template_name='registration/change_password.html'
     success_url = reverse_lazy('post')
 
+class Passwdresetview(PasswordResetConfirmView):
+    form_class = Passwdresetform
+    template_name='registration/passwd_reset_form.html'
 
+class passwdemailview(PasswordResetView):
+    form_class = passwdemailform
+    template_name = 'registration/reset_passwd.html'
 #class LoginAuthview(generic.FormView):
 #    form_class = LoginAuthForm
 #    template_name='registration/login.html'

@@ -1,0 +1,38 @@
+{% extends 'Stechblog/base_contact.html' %}
+{% load static %}
+
+{% block title %} 
+Blog Post
+{% endblock %}
+
+{% block nav %}Password reset complete{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+              <div class="page-wrapper">
+                  <div class="">
+    <h6 style="width: 60%; margin: 0 auto">
+      Your Password has been set. You may go ahead and login
+    </h6>
+
+  <br />
+  <div class="text-center">
+    <a class="btn btn-success" href="{% url 'login' %}">Login</a>
+  </div>
+  <hr class="invis1">
+
+</div><!-- end page-wrapper -->
+
+<hr class="invis">
+
+</div>
+</div>
+</div>
+</div><!-- end container -->
+</section>
+
+
+{% endblock %}
