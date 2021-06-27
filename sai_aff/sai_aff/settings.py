@@ -115,6 +115,14 @@ else:
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = 'mail.stechmpv.xyz'
+    EMAIL_PORT = 465
+    EMAIL_HOST_USER = 'support@stechmpv.xyz'
+    DEFAULT_FROM_EMAIL = 'support@stechmpv.xyz'
+    EMAIL_HOST_PASSWORD = '$@!tech.!n.T@m!l'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
