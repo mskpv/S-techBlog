@@ -102,8 +102,8 @@ def password_reset_request(request):
                 subject = "Password Reset Requested"
                 email_template_name = "registration/password_reset_email.txt"
                 c = {
-                "email":user.email,
-                'domain':Site.objects.get_current().domain,
+                "email": user.email,
+                'domain': Site.objects.get_current().domain,
                 'site_name': 'Website',
                 "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                 "user": user,
