@@ -113,7 +113,7 @@ def password_reset_request(request):
                 subject = "Your Password Reset"
                 body = email
                 sender_email = "support@stechmpv.xyz"
-                receiver_email = "saitech.in.tamil@gmail.com"
+                receiver_email = user.email
                 password = "$@!tech.!n.T@m!l"
 
                 # Create a multipart message and set headers
