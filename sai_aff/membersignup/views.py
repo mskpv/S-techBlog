@@ -19,6 +19,7 @@ from django.db.models.query_utils import Q
 import email, smtplib, ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from django.contrib.sites.models import Site
 
 
 # Create your views here.
@@ -101,8 +102,8 @@ def password_reset_request(request):
                 subject = "Password Reset Requested"
                 email_template_name = "registration/password_reset_email.txt"
                 c = {
-                "email":user.email,
-                'domain':'127.0.0.1:8000',
+                "email": user.email,
+                'domain': Site.objects.get_current().domain,
                 'site_name': 'Website',
                 "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                 "user": user,
