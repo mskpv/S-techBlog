@@ -102,8 +102,8 @@ def password_reset_request(request):
                 subject = "Password Reset Requested"
                 email_template_name = "registration/password_reset_email.txt"
                 c = {
-                "email":user.email,
-                'domain':Site.objects.get_current().domain,
+                "email": user.email,
+                'domain': Site.objects.get_current().domain,
                 'site_name': 'Website',
                 "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                 "user": user,
@@ -114,7 +114,7 @@ def password_reset_request(request):
                 subject = "Your Password Reset"
                 body = email
                 sender_email = "support@stechmpv.xyz"
-                receiver_email = "saitech.in.tamil@gmail.com"
+                receiver_email = user.email
                 password = "$@!tech.!n.T@m!l"
 
                 # Create a multipart message and set headers
