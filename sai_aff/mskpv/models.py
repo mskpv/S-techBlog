@@ -3,7 +3,7 @@ from django.db.models.signals import pre_save
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
-from ckeditor.fields import RichTextField
+#from ckeditor.fields import RichTextField
 from tinymce.models import HTMLField
 from django.utils.text import slugify
 import random, string
