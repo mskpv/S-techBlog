@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
 from ckeditor.fields import RichTextField
+from tinymce.models import HTMLField
 from django.utils.text import slugify
 import random, string
 from django.core.exceptions import ValidationError
@@ -61,7 +62,8 @@ class Post(models.Model):
     category = models.CharField(max_length=225, default='---')
     snippet = models.CharField(max_length=225)
     slug = models.SlugField(max_length = 250, null = True, blank = True, unique=True)
-    body = RichTextField(blank=True, null=True)
+    body = HTMLField()
+    #body = RichTextField(blank=True, null=True)
     #body = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User, related_name='like_post',blank=True)
