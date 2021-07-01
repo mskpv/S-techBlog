@@ -43,3 +43,20 @@
 .text-right{text-align:right!important}
 
 .card-body{-ms-flex:1 1 auto;flex:1 1 auto;padding:1.25rem}.card-title{margin-bottom:.75rem}
+
+blockquote {
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  border-left: 0.25rem solid #2196F3;
+  padding: 1rem 1rem 1rem 2rem;
+  margin-bottom: 2rem;
+  overflow: auto;
+  background:#eeeeee;
+}
