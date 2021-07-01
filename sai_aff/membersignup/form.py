@@ -9,6 +9,7 @@ class Profile_page_form(forms.ModelForm):
         fields = ('bio', 'image', 'youtube_url', 'facebook_url', 'twitter_url', 'instagram_url')
 
         widgets = {
+            'image': forms.FileInput(attrs={'required': False,'class': 'form-control'}),
             'bio': forms.Textarea(attrs={'class': "form-control"}),
             #'profile_pic': forms.TextInput(attrs={'class': "form-control"}),
             'youtube_url': forms.TextInput(attrs={'class': "form-control"}),
@@ -19,6 +20,7 @@ class Profile_page_form(forms.ModelForm):
         }
 
 class SignUpForm(UserCreationForm):
+    username = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': "form-control"}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': "form-control"}))
     first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': "form-control"}))
     last_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': "form-control"}))
@@ -44,7 +46,7 @@ class EditProfileForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name','last_name','email','last_login','date_joined','password')
+        fields = ('username', 'first_name','last_name','email','last_login','date_joined')
 
 class Passwordchangingform(PasswordChangeForm):
     old_password = forms.CharField(max_length=100, widget=forms.PasswordInput(attrs={'class': "form-control"}))
