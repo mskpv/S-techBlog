@@ -10,11 +10,9 @@
 {% block description %}{{ post.snippet }}{% endblock %} 
 {% block author %}{{ post.author }}{% endblock %} 
 {% block og:url %}{{ request.build_absolute_uri }}{% endblock %}
-{% block og:image %}{{ post.header_image }}{% endblock %}
 {% block og:description %}{{ post.snippet }}{% endblock %} 
 {% block og:title %}{{ post.title}}{% endblock %}
 {% block twi:url %}{{ request.build_absolute_uri }}{% endblock %}
-{% block twi:image %}{{ post.header_image }}{% endblock %}
 {% block twi:description %}{{ post.snippet }}{% endblock %} 
 {% block twi:title %}{{ post.title}}{% endblock %}
 {% block pub_time %}{{ post.published_date }}{% endblock %}
