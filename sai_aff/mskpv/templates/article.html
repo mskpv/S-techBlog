@@ -156,9 +156,8 @@
                                                 <div class="media-body">
                                                     <h4 class="media-heading user_name">{{ comment.name }} <small>{{ comment.date_added }}</small></h4>
                                                     <p>{{ comment.body }}</p>
-                                                    <p>||==========Replys===========||</p>
                                                     {% if comment.replies.all %}
-                                                    <h5>response:</h5>
+                                                    <h5 style="color: teal;">response:</h5>
                                                     {% for reply in comment.replies.all %}
                                                     <p><i class="fa fa-book"></i>=> {{ reply.reply_body }}</p>
                                                     {% endfor %}
