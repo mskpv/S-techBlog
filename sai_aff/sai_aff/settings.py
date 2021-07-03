@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mskpv',
     'membersignup',
-#    'ckeditor',
-    'tinymce',
+    'ckeditor',
+#    'tinymce',
     'hitcount',
     'django_social_share',
     'django.contrib.sites',
@@ -52,13 +52,13 @@ INSTALLED_APPS = [
 
 SITE_ID = 3
 
-#CKEDITOR_CONFIGS = {
-#    'default': {
-#        'toolbar': 'full',
-#        'height': 300,
-#        'width': 1000,
-#    },
-#}
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 1000,
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -134,28 +134,28 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-TINYMCE_DEFAULT_CONFIG = {
-    'cleanup_on_startup': True,
-    'custom_undo_redo_levels': 20,
-    'selector': '.tinymce',
-    'theme': 'silver',
-    'plugins': '''
-            textcolor save link image media preview codesample contextmenu
-            table code lists fullscreen  insertdatetime  nonbreaking
-            contextmenu directionality searchreplace wordcount visualblocks
-            visualchars code fullscreen autolink lists  charmap print  hr
-            anchor pagebreak
-            ''',
-    'toolbar1': '''
-            fullscreen preview bold italic underline blockquote | fontselect,
-            fontsizeselect  | forecolor backcolor | alignleft alignright |
-            aligncenter alignjustify | indent outdent | bullist numlist table |
-            | link image media | codesample | code
-            ''',
-    'contextmenu': 'formats | link image ',
-    'menubar': True,
-    'statusbar': True,
-}
+#TINYMCE_DEFAULT_CONFIG = {
+#    'cleanup_on_startup': True,
+#    'custom_undo_redo_levels': 20,
+#    'selector': '.tinymce',
+#    'theme': 'silver',
+#    'plugins': '''
+#            textcolor save link image media preview codesample contextmenu
+#            table code lists fullscreen  insertdatetime  nonbreaking
+#            contextmenu directionality searchreplace wordcount visualblocks
+#            visualchars code fullscreen autolink lists  charmap print  hr
+#            anchor pagebreak
+#            ''',
+#    'toolbar1': '''
+#            fullscreen preview bold italic underline blockquote | fontselect,
+#            fontsizeselect  | forecolor backcolor | alignleft alignright |
+#            aligncenter alignjustify | indent outdent | bullist numlist table |
+#            | link image media | codesample | code
+#            ''',
+#    'contextmenu': 'formats | link image ',
+#    'menubar': True,
+#    'statusbar': True,
+#}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

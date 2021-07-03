@@ -61,12 +61,17 @@ blockquote {
   background:#eeeeee;
 }
 
-.tox.tox-tinymce {
+.django-ckeditor-widget {
   width: max-content;
 }
 
 @media screen and (max-width: 801px) {
-.tox.tox-tinymce {
+.django-ckeditor-widget {
   width: auto;
 }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
