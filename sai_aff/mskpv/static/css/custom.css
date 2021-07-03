@@ -66,8 +66,8 @@ blockquote {
 }
 
 @media screen and (max-width: 801px) {
-.django-ckeditor-widget {
-  width: auto;
+.reply_mob {
+  display: none;
 }
 }
 
