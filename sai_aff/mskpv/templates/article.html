@@ -149,6 +149,7 @@
                                                    No Comments Yet...
                                             {% else %}
                                             {% for comment in post.comments.all %}
+                                            {% if comment.approved_comment %}
                                             <div class="media">
                                                 <a class="media-left reply_mob" href="#">
                                                     <img src="{% static 'images/Blog_Person.png' %}" alt="image of {{ comment.name }}" class="rounded-circle">
@@ -156,6 +157,11 @@
                                                 <div class="media-body">
                                                     <h4 class="media-heading user_name">{{ comment.name }} <small>{{ comment.date_added }}</small></h4>
                                                     <p>{{ comment.body }}</p>
+                                                    {% if user.is_authenticated %}
+                                                    <a style="color: crimson;" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span>Delete Command</a>
+                                                    {% else %}
+                                                    <a style="color: crimson;" href="{% url 'login' %}"><span class="glyphicon glyphicon-remove"></span>Login to Delete </a>
+                                                    {% endif %}
                                                     {% if comment.replies.all %}
                                                     <h5 style="color: teal;">response:</h5>
                                                     {% for reply in comment.replies.all %}
@@ -174,6 +180,7 @@
                                                     </script>
                                                 </div>
                                             </div>
+                                            {% endif %}
                                             {% endfor %}
                                             {% endif %}
                                         </div>
