@@ -1,0 +1,32 @@
+from django.db import migrations, models
+import mskpv.models
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('mskpv', '0033_alter_post_image'),
+    ]
+
+    operations = [
+        migrations.AddField(
+            model_name='comment',
+            name='approved_comment',
+            field=models.BooleanField(default=False),
+        ),
+        migrations.AddField(
+            model_name='profile',
+            name='header_image',
+            field=models.TextField(blank=True, null=True),
+        ),
+        migrations.AddField(
+            model_name='profile',
+            name='image',
+            field=models.ImageField(blank=True, null=True, upload_to='temp/', validators=[mskpv.models.validate_image]),
+        ),
+        migrations.AlterField(
+            model_name='post',
+            name='image',
+            field=models.ImageField(blank=True, null=True, upload_to='temp/', validators=[mskpv.models.validate_image]),
+        ),
+    ]
