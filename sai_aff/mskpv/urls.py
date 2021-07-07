@@ -32,4 +32,5 @@ urlpatterns = [
     path('amazon-mobiles/', views.amazon_mobiles, name='amazon_mobiles' ),
     path('amazon-gift/', views.amazon_gift, name='amazon_gift' ),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
+    path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
 ]
