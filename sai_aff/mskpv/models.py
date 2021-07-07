@@ -132,10 +132,10 @@ class Comment(models.Model):
     email = models.EmailField()
     body = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
-    approved_comment = models.BooleanField(default=False)
+    approved_comment = models.BooleanField(default=True)
 
     def approve(self):
-        self.approved_comment = True
+        self.approved_comment = False
         self.save()
 
     def __str__(self):

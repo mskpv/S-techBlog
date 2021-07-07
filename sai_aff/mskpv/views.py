@@ -65,6 +65,12 @@ class article(HitCountDetailView):
         data['formr'] = self.formr
         return data
 
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    post_slug = comment.post.slug
+    comment.delete()
+    return redirect('article-details', slug=post_slug)
+
 class Addpost_view(CreateView):
     model = Post
     form_class = Postform
