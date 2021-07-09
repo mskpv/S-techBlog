@@ -163,7 +163,7 @@ def subscription(request):
     return render(request, 'subscription.html')
 
 def userpost_view(request,state):
-    status_posts = Post.objects.filter(status=state)
+    status_posts = Post.objects.filter(status=state).filter(author_id=request.user.id)
     page = request.GET.get('page', 1)
     #page = request.GET.get('page')
     paginator = Paginator(status_posts, 10)
