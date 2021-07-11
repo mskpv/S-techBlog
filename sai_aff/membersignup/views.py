@@ -136,3 +136,6 @@ def password_reset_request(request):
 #    form_class = LoginAuthForm
 #    template_name='registration/login.html'
 #    success_url = reverse_lazy('post')
+
+def user_visit(request):
+    return render(request, 'registration/User_visit.html')

@@ -44,5 +44,10 @@ def save_visitor_infos(request):
     context_nb_vistors = 0
     ref_date = present_date - datetime.timedelta(minutes=5) 
     context_nb_vistors = Visitor_Infos.objects.filter(event_date__gte=ref_date).values_list('ip_address', flat=True).distinct().count()
+    total_nb_vistors = Visitor_Infos.objects.values_list('ip_address', flat=True).distinct().count()
+    context = {
+        'context_nb_vistors': context_nb_vistors, 
+        'total_nb_vistors': total_nb_vistors,
+    }
 
-    return {"context_nb_vistors":context_nb_vistors}
+    return context
