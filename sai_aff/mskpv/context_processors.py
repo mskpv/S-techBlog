@@ -2,6 +2,7 @@ from .models import Post, category, Comment, Reply, Emailsubscription
 from .form import sub_email
 from django.core.paginator import Paginator, EmptyPage
 from django.contrib.sites.models import Site
+from django.http import Http404
 
 def get_search_list(request):
     category_search = category.objects.all()
@@ -22,4 +23,9 @@ def get_search_list(request):
         'sub_form': form,
     }
  
+    if request.path.startswith('/admin'):
+        if request.user.is_authenticated:
+            if request.user.id != 1:
+                raise Http404
+
     return context
