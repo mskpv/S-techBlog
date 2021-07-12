@@ -5,7 +5,7 @@
 Blog Post
 {% endblock %}
 
-{% block nav %}Registration{% endblock %}{% block trm %} thanks for registering in S-Tech Blog ... {% endblock %}
+{% block nav %}Visitors Dashboard{% endblock %}{% block trm %} Total number of visitoes visit S-Tech Blog ... {% endblock %}
 
 {% block body %}
 <section class="section wb">
@@ -15,10 +15,72 @@ Blog Post
                 <div class="page-wrapper">
                     <div class="row">
                         
-                        <div class="col-lg-7">
-                         today Visitors = {{context_nb_vistors}}
-                         <br>   
-                         total Visitors = {{total_nb_vistors }}
+
+                        <div class="col-lg-12">
+                            <div class="single_element">
+                                <div class="quick_activity">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="quick_activity_wrap">
+                                                <div class="single_quick_activity d-flex">
+                                                    <div class="icon">
+                                                        <img src="img/icon/man.svg" alt="">
+                                                    </div>
+                                                    <div class="count_content">
+                                                        <h3><span class="counter">{{ d1_nb_vistors }}</span> </h3>
+                                                        <p>Today Visitors</p>
+                                                    </div>
+                                                </div>
+                                                <div class="single_quick_activity d-flex">
+                                                    <div class="icon">
+                                                        <img src="img/icon/cap.svg" alt="">
+                                                    </div>
+                                                    <div class="count_content">
+                                                        <h3><span class="counter">{{ d7_nb_vistors }}</span> </h3>
+                                                        <p>Last 7 day Visitors</p>
+                                                    </div>
+                                                </div>
+                                                <div class="single_quick_activity d-flex">
+                                                    <div class="icon">
+                                                        <img src="img/icon/wheel.svg" alt="">
+                                                    </div>
+                                                    <div class="count_content">
+                                                        <h3><span class="counter">{{ d30_nb_vistors }}</span> </h3>
+                                                        <p>Last 30 days Visitors</p>
+                                                    </div>
+                                                </div>
+                                                <div class="single_quick_activity d-flex">
+                                                    <div class="icon">
+                                                        <img src="img/icon/pharma.svg" alt="">
+                                                    </div>
+                                                    <div class="count_content">
+                                                        <h3><span class="counter">{{ d90_nb_vistors }}</span> </h3>
+                                                        <p>Last 90 days Visitors</p>
+                                                    </div>
+                                                </div>
+                                                <div class="single_quick_activity d-flex">
+                                                    <div class="icon">
+                                                        <img src="img/icon/pharma.svg" alt="">
+                                                    </div>
+                                                    <div class="count_content">
+                                                        <h3><span class="counter">{{ d180_nb_vistors }}</span> </h3>
+                                                        <p>Last 180 days Visitors</p>
+                                                    </div>
+                                                </div>
+                                                <div class="single_quick_activity d-flex">
+                                                    <div class="icon">
+                                                        <img src="img/icon/pharma.svg" alt="">
+                                                    </div>
+                                                    <div class="count_content">
+                                                        <h3><span class="counter">{{total_nb_vistors }}</span> </h3>
+                                                        <p>Last Six Month Visitors</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div><!-- end page-wrapper -->

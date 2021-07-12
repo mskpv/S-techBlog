@@ -41,12 +41,27 @@ def save_visitor_infos(request):
     except:
         pass
 
-    context_nb_vistors = 0
-    ref_date = present_date - datetime.timedelta(minutes=5) 
-    context_nb_vistors = Visitor_Infos.objects.filter(event_date__gte=ref_date).values_list('ip_address', flat=True).distinct().count()
+    d1_nb_vistors = 0
+    d1_date = present_date - datetime.timedelta(minutes=5)
+    d7_date = present_date - datetime.timedelta(days=7)
+    d30_date = present_date - datetime.timedelta(days=30)
+    d90_date = present_date - datetime.timedelta(days=90)
+    d180_date = present_date - datetime.timedelta(days=180)
+
+
+    d1_nb_vistors = Visitor_Infos.objects.filter(event_date__gte=d1_date).values_list('ip_address', flat=True).distinct().count()
+    d7_nb_vistors = Visitor_Infos.objects.filter(event_date__gte=d7_date).values_list('ip_address', flat=True).distinct().count()
+    d30_nb_vistors = Visitor_Infos.objects.filter(event_date__gte=d30_date).values_list('ip_address', flat=True).distinct().count()
+    d90_nb_vistors = Visitor_Infos.objects.filter(event_date__gte=d90_date).values_list('ip_address', flat=True).distinct().count()
+    d180_nb_vistors = Visitor_Infos.objects.filter(event_date__gte=d180_date).values_list('ip_address', flat=True).distinct().count()
     total_nb_vistors = Visitor_Infos.objects.values_list('ip_address', flat=True).distinct().count()
+
     context = {
-        'context_nb_vistors': context_nb_vistors, 
+        'd1_nb_vistors': d1_nb_vistors, 
+        'd7_nb_vistors': d7_nb_vistors, 
+        'd30_nb_vistors': d30_nb_vistors, 
+        'd90_nb_vistors': d90_nb_vistors, 
+        'd180_nb_vistors': d180_nb_vistors, 
         'total_nb_vistors': total_nb_vistors,
     }
 
