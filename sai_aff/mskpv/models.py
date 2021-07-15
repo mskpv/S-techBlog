@@ -18,10 +18,9 @@ def validate_image(image):
         file_size = image.file.size
         limit_kb = 100
         w, h = get_image_dimensions(image.file)
-        print(h,'=======================',w)
         if file_size > limit_kb * 1024:
             raise ValidationError("Max size of file is {} KB and max width = 800px, max height = 400px".format(limit_kb))
-        elif h >= 400:
+        elif h > 400:
             raise ValidationError("Image should have Max width = 800px, max height = 400px")
 
     except  OSError:
@@ -46,6 +45,10 @@ class Profile(models.Model):
 
 class category(models.Model):
     name = models.CharField(max_length=225)
+
+    def save(self, *args, **kwargs):
+        self.name = self.name.lower()
+        return super(category, self).save(*args, **kwargs)
     
     def __str__(self):
         return self.name
