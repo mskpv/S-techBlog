@@ -96,6 +96,9 @@ WSGI_APPLICATION = 'sai_aff.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+with open(BASE_DIR /'msql_pass.txt') as f:
+    msql_pass = f.read().strip()
+
 if DEBUG:
     DATABASES = {
     'default': {
@@ -107,11 +110,11 @@ else:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gzqytuay_saidb',
-        'USER': 'gzqytuay_mskpv',
-        'PASSWORD': '$@!tech.!n.T@m!l',
+        'NAME': msql_pass.split(',')[1],
+        'USER': msql_pass.split(',')[2],
+        'PASSWORD': msql_pass.split(',')[0],
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': msql_pass.split(',')[3],
     }
 }
 
