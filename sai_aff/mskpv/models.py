@@ -16,12 +16,11 @@ from django.core.files.images import get_image_dimensions
 def validate_image(image):
     try:
         file_size = image.file.size
-        limit_kb = 100
+        limit_kb = 150
         w, h = get_image_dimensions(image.file)
-        print(h,'=======================',w)
         if file_size > limit_kb * 1024:
             raise ValidationError("Max size of file is {} KB and max width = 800px, max height = 400px".format(limit_kb))
-        elif h >= 400:
+        elif h > 400:
             raise ValidationError("Image should have Max width = 800px, max height = 400px")
 
     except  OSError:
@@ -31,7 +30,7 @@ def validate_image(image):
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
-    image = models.ImageField(null=True, blank=True, upload_to='temp/',validators=[validate_image])
+    image = models.ImageField(null=True, blank=True, upload_to='temp/')
     header_image = models.TextField(null=True, blank=True)
     youtube_url = models.CharField(max_length=255, null=True, blank=True)
     facebook_url = models.CharField(max_length=255, null=True, blank=True)
