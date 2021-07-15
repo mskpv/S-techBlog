@@ -29,7 +29,7 @@
                                     <li class="breadcrumb-item active">{{ post.title}}</li>
                                 </ol>
                                 
-                                <span class="color-orange"><a href="{% url 'category' post.category %}">{{ post.category }}</a></span>
+                                <span class="color-orange"><a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a></span>
                                 {% if user.is_authenticated %}{% if post.author.id == user.id %}  <span class="color-orange" ><small><a href="{% url 'Update_post' post.slug %}">Edit the Post</a> - <a href="{% url 'Delete_post' post.slug %}">Delete the Post</a></small></span>{% endif %}{% endif %}
                                 <h3>{{ post.title}}</h3> 
 
