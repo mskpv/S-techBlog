@@ -98,7 +98,7 @@ class Addcategory_view(CreateView):
 
 def Category_view(request,cats):
     cats_list = category.objects.all()
-    category_posts = Post.objects.all().order_by('-published_date').filter(status=1).filter(category=cats.replace('-',' '))
+    category_posts = Post.objects.all().order_by('-published_date').filter(status=1).filter(category__iexact=cats.replace('-',' '))
     page = request.GET.get('page', 1)
     paginator = Paginator(category_posts, 9)
     try:
