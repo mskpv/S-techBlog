@@ -57,7 +57,7 @@
                                 {% elif post.image %}
                                 <img src="{{ post.image.url }}" alt="image of {{post.title}}"  class="img-fluid" >
                                 {% else %}
-                                <img src="{% static 'upload/web_server.jpg' %}" alt="{{post.title}}" class="img-fluid" style="width:800px;height:400px;" >
+                                <img src="{% static 'upload/web_server.jpg' %}" alt="{{post.title}}" class="img-fluid" >
                                 {% endif %}
                             </div><!-- end media -->
 
