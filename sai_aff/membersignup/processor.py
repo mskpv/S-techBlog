@@ -42,7 +42,8 @@ def save_visitor_infos(request):
         pass
 
     d1_nb_vistors = 0
-    d1_date = present_date - datetime.timedelta(minutes=5)
+    #d1_date = present_date - datetime.timedelta(minutes=5)
+    d1_date = present_date - datetime.timedelta(days=1)
     d7_date = present_date - datetime.timedelta(days=7)
     d30_date = present_date - datetime.timedelta(days=30)
     d90_date = present_date - datetime.timedelta(days=90)
