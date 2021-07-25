@@ -42,7 +42,7 @@
                             {% elif post.image %}
                             <img src="{{ post.image.url }}" alt="image of {{post.title}}"  class="img-fluid" style="height:250px;" >
                             {% else %}
-                            <img src="{% static 'upload/web_server.jpg' %}" alt="image of {{ post.title }}" class="img-fluid">
+                            <img src="{% static 'upload/web_server.jpg' %}" alt="image of {{ post.title }}" class="img-fluid" style="height:250px;">
                             {% endif %}
                             <div class="hovereffect"></div>
                         </a>
