@@ -7,7 +7,8 @@ from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from hitcount.views import HitCountDetailView
 import pandas as pd
-import os
+import os, base64
+from PIL import Image
 
 # Create your views here.
 def index(request):
@@ -55,6 +56,25 @@ class article(HitCountDetailView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
 
+        soc_img=self.kwargs['slug']+'.jpg'
+        module_dir = os.path.dirname(__file__)  
+        file_path = os.path.join(module_dir, 'static'+os.sep+'soc'+os.sep+soc_img)
+        social_img = False
+        if os.path.isfile(file_path) != 'True':
+            try:         
+                soc_gen = get_object_or_404(Post, slug=self.kwargs['slug'])
+                base_i = soc_gen.header_image
+                byte = base_i.split('base64,')[1]
+                with open(file_path, 'wb') as f:
+                  f.write(base64.b64decode((byte)))
+                image = Image.open(file_path)
+                new_image = image.resize((200, 200))
+                new_image.save(file_path)
+                social_img = soc_img
+            except IndexError:
+                pass
+        
+
         likes_connected = get_object_or_404(Post, slug=self.kwargs['slug'])
         liked = False
         if likes_connected.likes.filter(id=self.request.user.id).exists():
@@ -63,6 +83,7 @@ class article(HitCountDetailView):
         data['post_is_liked'] = liked
         data['form'] = self.form
         data['formr'] = self.formr
+        data['social_img'] = social_img
         return data
 
 def comment_remove(request, pk):
