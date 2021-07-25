@@ -8,7 +8,7 @@
     <meta property="og:type" content="article">
     <meta property="og:description" content="{% block og:description %} {% endblock %}">
     <meta property="og:url" content="{% block og:url %} {% endblock %}">
-    <meta property="og:image" content="http://{{ host }}/static/images/soc_doc.jpg">
+    <meta property="og:image" content="http://{{ host }}/static/soc/{% block og:img %} {% endblock %}">
     <meta property="og:title" content="{% block og:title %} {% endblock %}">
     <meta property="article:published_time" content="{% block pub_time %} {% endblock %}">
     

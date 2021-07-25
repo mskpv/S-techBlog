@@ -12,6 +12,7 @@
 {% block og:url %}{{ request.build_absolute_uri }}{% endblock %}
 {% block og:description %}{{ post.snippet }}{% endblock %} 
 {% block og:title %}{{ post.title}}{% endblock %}
+{% block og:img %}{{ social_img }}{% endblock %}
 {% block twi:url %}{{ request.build_absolute_uri }}{% endblock %}
 {% block twi:description %}{{ post.snippet }}{% endblock %} 
 {% block twi:title %}{{ post.title}}{% endblock %}
