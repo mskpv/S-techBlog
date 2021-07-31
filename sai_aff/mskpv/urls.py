@@ -3,7 +3,7 @@ from .sitemaps import BlogPostSitemap, StaticViewSitemap
 from django.urls import path
 from django.contrib.auth import views
 from . import views
-from .views import post, article, Addpost_view, Updatepost_view, Deletepost_view, Addcategory_view, subscription, userpost_view #, AddComment_view
+from .views import post, article, Addpost_view, Updatepost_view, Deletepost_view, Addcategory_view, subscription, userpost_view, SearchResultsList #, AddComment_view
 
 sitemaps = {
     'posts': BlogPostSitemap,
@@ -33,4 +33,5 @@ urlpatterns = [
     path('amazon-gift/', views.amazon_gift, name='amazon_gift' ),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
+    path("search/", SearchResultsList.as_view(), name="search_results"),
 ]

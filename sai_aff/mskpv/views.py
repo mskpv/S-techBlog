@@ -203,3 +203,14 @@ def Terms_Conditions(request):
 
 def Privacy_Policy(request):
     return render(request,'Stechblog/Privacy_Policy.html')
+
+class SearchResultsList(ListView):
+    model = Post
+    context_object_name = "quotes"
+    template_name = "Stechblog/search.html"
+    print(context_object_name)
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        print(query)
+        return Post.objects.filter(title__contains=query)
