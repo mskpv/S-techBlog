@@ -51,10 +51,10 @@
                 <ul class="navbar-nav mr-2">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <form class="form-inline my-2 my-lg-0" id="search_cat" action="">
-                            <input class="form-control mr-sm-2" type="text" id="tags" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-light" onclick="fn1()" type="submit">Search</button>
-                          </form>
+                        <form class="form-inline my-2 my-lg-0" id="search_cat" action="{% url 'search_results' %}"  method="get">
+                            <input id="tags" type="search" name="q" placeholder="Search..." class="form-control mr-sm-2" aria-label="Search">
+                            <button class="btn btn-light" onclick="" type="submit">Search</button>
+                        </form>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -74,9 +74,9 @@
                       </li>
                     {% else %}
                     <li class="nav-item">
-                        <form class="form-inline my-2 my-lg-0" id="search_cat" action="">
-                            <input class="form-control mr-sm-2" type="text" id="tags" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-light" onclick="fn1()" type="submit">Search</button>
+                        <form class="form-inline my-2 my-lg-0" id="search_cat" action="{% url 'search_results' %}"  method="get">
+                            <input id="tags" type="search" name="q" placeholder="Search..." class="form-control mr-sm-2" aria-label="Search">
+                            <button class="btn btn-light" onclick="" type="submit">Search</button>
                           </form>
                     </li>
                     <li class="nav-item">
