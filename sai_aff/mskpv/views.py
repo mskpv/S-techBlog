@@ -68,6 +68,8 @@ class article(HitCountDetailView):
                 with open(file_path, 'wb') as f:
                   f.write(base64.b64decode((byte)))
                 image = Image.open(file_path)
+                if image.mode != 'RGB':
+                   image = image.convert('RGB')
                 new_image = image.resize((200, 200))
                 new_image.save(file_path)
                 social_img = soc_img
