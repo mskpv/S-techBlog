@@ -5,7 +5,7 @@ from django.contrib.sites.models import Site
 from django.http import Http404
 
 def get_search_list(request):
-    category_search = category.objects.all()
+    category_search = Post.objects.all()
     post_ads = Post.objects.all().order_by('-published_date').filter(status=1)
     paginator = Paginator(post_ads, 3)
 
