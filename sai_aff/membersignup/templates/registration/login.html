@@ -28,8 +28,10 @@ Blog Post
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                                    </div>
+                                    <div class="form-group">
+                                    <a href="{% url 'reset_password' %}" class="text-reset" style="color:rgb(49 151 214);">Forget Your password ??? => Click Me</a> 
                                     </div>  
-                                    <a href="{% url 'reset_password' %}" class="text-reset">Forget Your password?</a> 
                                     <p class="login-wrapper-footer-text">Don't have an account? <a href="{% url 'register' %}" class="btn btn-primary btn-block">Register here</a></p>
                                 
                             </form>
