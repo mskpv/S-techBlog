@@ -82,9 +82,16 @@ blockquote p {
   width: max-content;
 }
 
+.tox.tox-tinymce {
+  width: max-content;
+}
+
 @media screen and (max-width: 801px) {
 .reply_mob {
   display: none;
+}
+.tox.tox-tinymce {
+  width: auto;
 }
 }
 
