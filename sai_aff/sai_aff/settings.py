@@ -146,6 +146,9 @@ TINYMCE_DEFAULT_CONFIG = {
     'contextmenu': 'formats | link image ',
     'menubar': True,
     'statusbar': True,
+    'relative_urls' : True,
+    'document_base_url' : 'http://www.example.com/path1/'
+
 }
 
 # Internationalization
