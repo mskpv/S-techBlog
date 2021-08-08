@@ -1,5 +1,0 @@
----
-deployment:
- tasks:
- - export DEPLOYPATH=/home/gzqytuay/sai_aff
- - /bin/cp -a * $DEPLOYPATH
