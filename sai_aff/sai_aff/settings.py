@@ -153,6 +153,9 @@ TINYMCE_DEFAULT_CONFIG = {
     'contextmenu': 'formats | link image ',
     'menubar': True,
     'statusbar': True,
+    'relative_urls' : False,
+    'document_base_url' : 'https://stechmpv.xyz'
+
 }
 
 # Internationalization

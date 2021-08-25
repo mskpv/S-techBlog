@@ -16,7 +16,7 @@ from django.core.files.images import get_image_dimensions
 def validate_image(image):
     try:
         file_size = image.file.size
-        limit_kb = 150
+        limit_kb = 250
         w, h = get_image_dimensions(image.file)
         if file_size > limit_kb * 1024:
             raise ValidationError("Max size of file is {} KB and max width = 800px, max height = 400px".format(limit_kb))
