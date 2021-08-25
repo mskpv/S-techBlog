@@ -147,7 +147,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'menubar': True,
     'statusbar': True,
     'relative_urls' : False,
-    'document_base_url' : 'http://www.example.com/'
+    'document_base_url' : 'https://stechmpv.xyz'
 
 }
 
