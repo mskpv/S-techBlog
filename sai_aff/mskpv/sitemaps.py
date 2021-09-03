@@ -8,7 +8,7 @@ class BlogPostSitemap(Sitemap):
     protocol = 'https'
 
     def items(self):
-        return Post.objects.all()
+        return Post.objects.filter(status=1)
 
     def lastmod(self, obj):
         return obj.published_date
