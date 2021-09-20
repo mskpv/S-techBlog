@@ -75,6 +75,8 @@ pre {
 blockquote p {
   margin-bottom: 0;
   color: #292b2c;
+  text-align: unset;
+  white-space: nowrap;
   font-family: Georgia, Times, "Times New Roman", sans-serif;
 }
 
