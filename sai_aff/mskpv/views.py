@@ -18,7 +18,7 @@ class post(ListView):
     model = Post
     queryset = Post.objects.filter(status=1)
     template_name = 'post.html'
-    paginate_by = 9
+    paginate_by = 12
     cats = category.objects.all()
     ordering = ['-published_date']
     #ordering = ['-id']
