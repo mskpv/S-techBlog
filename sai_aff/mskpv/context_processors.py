@@ -7,6 +7,7 @@ def get_search_list(request):
     category_search = Post.objects.all()
     post_ads = Post.objects.all().order_by('-published_date').filter(status=1)
     paginator = Paginator(post_ads, 3)
+    cat_menu = category.objects.all()
 
     form = sub_email()
 
@@ -16,6 +17,7 @@ def get_search_list(request):
         post_ads_post = paginator.page(paginator.num_pages)
 
     context = {
+        'cat_menu': cat_menu,
         'category_search': category_search, 
         'host': Site.objects.get_current().domain, 
         'post_ads_post': post_ads_post,
