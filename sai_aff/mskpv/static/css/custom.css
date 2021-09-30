@@ -291,3 +291,8 @@ img {
 p{
   text-align: justify;
 }
+
+body p span {
+  font-family: sans-serif;
+  color: #262524;
+}
