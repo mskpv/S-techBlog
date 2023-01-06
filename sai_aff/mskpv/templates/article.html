@@ -52,15 +52,6 @@
                                 </div><!-- end post-sharing -->
                             </div><!-- end title -->
 
-                            <div class="single-post-media">
-                                {% if post.header_image %}
-                                <img src="{{ post.header_image }}" alt="image of {{post.title}}"  class="img-fluid" >
-                                {% elif post.image %}
-                                <img src="{{ post.image.url }}" alt="image of {{post.title}}"  class="img-fluid" >
-                                {% else %}
-                                <img src="{% static 'upload/web_server.jpg' %}" alt="{{post.title}}" class="img-fluid" >
-                                {% endif %}
-                            </div><!-- end media -->
 
                             <div class="blog-content">  
                                 <div class="pp">
