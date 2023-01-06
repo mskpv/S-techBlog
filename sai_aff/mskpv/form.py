@@ -15,10 +15,9 @@ for list in choices:
 class Postform(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('image','title','title_tag','author','category','snippet','body')
+        fields = ('title','title_tag','author','category','snippet','body')
 
         widgets = {
-            'image': forms.FileInput(attrs={'required': False,'class': 'form-control'}),
             'title': forms.TextInput(attrs={'class': "form-control"}),
             'title_tag': forms.TextInput(attrs={'class': "form-control"}),
             'author': forms.TextInput(attrs={'class': "form-control", 'value': '', 'id':'author_name', 'type':'hidden'}),
@@ -32,10 +31,9 @@ class Postform(forms.ModelForm):
 class Editform(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('image','title','title_tag','category','snippet','body')
+        fields = ('title','title_tag','category','snippet','body')
 
         widgets = {
-            'image': forms.FileInput(attrs={'required': False,'class': 'form-control'}),
             'title': forms.TextInput(attrs={'class': "form-control"}),
             'title_tag': forms.TextInput(attrs={'class': "form-control"}),
             #'author': forms.Select(attrs={'class': "form-control"}),
