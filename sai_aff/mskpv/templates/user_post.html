@@ -32,21 +32,10 @@
         {% for post in category_posts %}
         {% if user.is_authenticated %}
         {% if post.author.id == user.id %}
-        <div class="blog-list clearfix">
+        <div class="">
             <div class="blog-box row">
-                <div class="col-md-4">
-                    <div class="post-media">
-                        <a href="{% url 'article-details' post.slug %}" title="">
-                            {% if post.header_image %}
-                            <img src="{{ post.header_image }}" alt="image of {{post.title}}"  class="img-fluid" style="height:250px;" >
-                            {% elif post.image %}
-                            <img src="{{ post.image.url }}" alt="image of {{post.title}}"  class="img-fluid" style="height:250px;" >
-                            {% else %}
-                            <img src="{% static 'upload/web_server.jpg' %}" alt="image of {{ post.title }}" class="img-fluid" style="height:250px;">
-                            {% endif %}
-                            <div class="hovereffect"></div>
-                        </a>
-                    </div><!-- end media -->
+                <div class="">
+
                 </div><!-- end col -->
 
                 <div class="blog-meta big-meta col-md-8">
